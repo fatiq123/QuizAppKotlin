@@ -6,4 +6,12 @@
     </style>
 
     <style name="Theme.QuizApp" parent="Base.Theme.QuizApp" />
+
+
+
+    <style name="ButtonStyle" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/button_background</item>
+    </style>
+
+
 </resources>
