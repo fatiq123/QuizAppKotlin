@@ -3,6 +3,8 @@
     <style name="Base.Theme.QuizApp" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/your_custom_primary_color</item>
+        <item name="colorPrimaryVariant">@color/your_custom_primary_variant_color</item>
     </style>
 
     <style name="Theme.QuizApp" parent="Base.Theme.QuizApp" />
@@ -14,4 +16,6 @@
     </style>
 
 
+    <color name="your_custom_primary_color">#0F68D3</color>
+    <color name="your_custom_primary_variant_color">#253DC5</color>
 </resources>

@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">QuizApp</string>
     <string name="quiz_app">Quiz App</string>
+    <string name="log_in">Log in</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="appbackgroundimage">AppBackgroundImage</string>
 </resources>

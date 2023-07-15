@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -9,7 +9,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="fitXY"
-            android:src="@drawable/login_background" />
+            android:src="@drawable/login_background"
+            android:contentDescription="@string/appbackgroundimage" />
 
         <TextView
             android:id="@+id/welcomeTextView"
@@ -32,10 +33,11 @@
             android:layout_marginTop="46dp"
             android:layout_marginRight="10dp"
             android:background="@drawable/edittext_background"
-            android:hint="Email"
+            android:hint="@string/email"
             android:inputType="textEmailAddress"
             android:paddingStart="26dp"
             android:paddingEnd="16dp"
+            android:paddingTop="10dp"
             android:textColor="#000000"
             android:textColorHint="#A9A9A9"
             android:textSize="16sp" />
@@ -49,10 +51,11 @@
             android:layout_marginTop="8dp"
             android:layout_marginRight="10dp"
             android:background="@drawable/edittext_background"
-            android:hint="Password"
+            android:hint="@string/password"
             android:inputType="textPassword"
             android:paddingStart="26dp"
             android:paddingEnd="16dp"
+            android:paddingTop="10dp"
             android:textColor="#000000"
             android:textColorHint="#A9A9A9"
             android:textSize="16sp" />
@@ -68,7 +71,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginRight="10dp"
             android:theme="@style/ButtonStyle"
-            android:text="Log in"
+            android:text="@string/log_in"
             android:textColor="#FFFFFF"
             android:textSize="28sp" />
 
@@ -79,7 +82,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginTop="61dp"
             android:layout_marginEnd="140dp"
-            android:text="Forgot password?"
+            android:text="@string/forgot_password"
             android:textColor="#FFFFFF"
             android:textSize="16sp" />
 
