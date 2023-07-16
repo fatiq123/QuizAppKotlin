@@ -66,12 +66,12 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/passwordEditText"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="36dp"
             android:layout_marginRight="10dp"
             android:theme="@style/ButtonStyle"
-            android:text="@string/log_in"
+            android:text="@string/login"
             android:textColor="#FFFFFF"
-            android:textSize="28sp" />
+            android:textSize="25sp" />
 
         <Button
             android:id="@+id/createNewAccountButton"
@@ -79,12 +79,12 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/loginButton"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:layout_marginRight="10dp"
             android:theme="@style/ButtonStyle"
             android:text="@string/create_new_account"
             android:textColor="#FFFFFF"
-            android:textSize="28sp" />
+            android:textSize="25sp" />
 
         <TextView
             android:layout_width="wrap_content"

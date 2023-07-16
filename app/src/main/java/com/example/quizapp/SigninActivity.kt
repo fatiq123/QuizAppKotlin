@@ -16,9 +16,10 @@ class SigninActivity : AppCompatActivity() {
 
 
 
-        binding.buttonNext.setOnClickListener {
+        binding.createNewAccountButton.setOnClickListener {
             val intent = Intent(this, SignupActivity::class.java)
             startActivity(intent)
         }
+
     }
 }
