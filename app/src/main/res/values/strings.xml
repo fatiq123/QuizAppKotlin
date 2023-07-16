@@ -5,5 +5,8 @@
     <string name="forgot_password">Forgot password?</string>
     <string name="password">Password</string>
     <string name="email">Email</string>
-    <string name="appbackgroundimage">AppBackgroundImage</string>
+    <string name="app_background_image">AppBackgroundImage</string>
+    <string name="create_new_account">Create new Account ?</string>
+    <string name="signup">Signup</string>
+    <string name="already_have_an_account">Already have an account ?</string>
 </resources>
