@@ -77,6 +77,17 @@ class LoginFragment : Fragment() {
 
 
     override fun onStart() {
+
+        val currentUser = auth.currentUser
+
+        if (currentUser != null) {
+            gotoHomeScreen()
+        }
+
         super.onStart()
+    }
+
+    private fun gotoHomeScreen() {
+        // code for fragment to home screen
     }
 }
