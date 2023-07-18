@@ -76,6 +76,7 @@ class LoginFragment : Fragment() {
     }
 
 
+    // if the user already exists we will check it onStart
     override fun onStart() {
 
         val currentUser = auth.currentUser
