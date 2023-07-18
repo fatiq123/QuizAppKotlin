@@ -1,10 +1,12 @@
 package com.example.quizapp.authentication
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.example.quizapp.R
@@ -54,11 +56,19 @@ class LoginFragment : Fragment() {
 
     private fun loginWithEmailAndPassword(email: String, password: String) {
         auth.signInWithEmailAndPassword(email, password)
-            .addOnSuccessListener {
 
-            }
-            .addOnFailureListener {
+            .addOnCompleteListener() { task ->
+                if (task.isSuccessful) {
 
+                }
+                else {
+                    Toast.makeText(
+                        Context,
+                        "Authentication failed",
+                        Toast.LENGTH_LONG
+                    )
+
+                }
             }
     }
 
