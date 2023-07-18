@@ -15,6 +15,11 @@ class LoginFragment : Fragment() {
 
     private lateinit var binding: FragmentSigninBinding
 
+    companion object {
+        var result = 0
+        var totalQuestions = 0
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
