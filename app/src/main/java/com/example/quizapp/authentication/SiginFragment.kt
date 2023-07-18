@@ -12,6 +12,7 @@ import androidx.navigation.findNavController
 import com.example.quizapp.R
 import com.example.quizapp.databinding.FragmentSigninBinding
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
@@ -20,6 +21,7 @@ class LoginFragment : Fragment() {
 
     private lateinit var binding: FragmentSigninBinding
     private lateinit var auth: FirebaseAuth
+
     companion object {
         var result = 0
         var totalQuestions = 0
@@ -57,22 +59,21 @@ class LoginFragment : Fragment() {
     private fun loginWithEmailAndPassword(email: String, password: String) {
         auth.signInWithEmailAndPassword(email, password)
 
-            .addOnCompleteListener() { task ->
+            .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-
-                }
-                else {
+                    // User creation successful, retrieve the user
+                    val user: FirebaseUser? = auth.currentUser
+                    // Proceed with further actions
+                } else {
                     Toast.makeText(
-                        Context,
-                        "Authentication failed",
+                        context,
+                        "Authentication failed: ${task.exception?.message}",
                         Toast.LENGTH_LONG
                     )
-
+                        .show()
                 }
             }
     }
-
-
 
 
     override fun onStart() {
