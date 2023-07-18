@@ -1,4 +1,4 @@
-package com.example.quizapp
+package com.example.quizapp.authentication
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
+import com.example.quizapp.R
 import com.example.quizapp.databinding.FragmentSignupBinding
 
 class SignupFragment : Fragment() {
