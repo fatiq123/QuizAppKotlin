@@ -31,4 +31,7 @@ class LoginFragment : Fragment() {
         return binding.root
     }
 
+    override fun onStart() {
+        super.onStart()
+    }
 }
