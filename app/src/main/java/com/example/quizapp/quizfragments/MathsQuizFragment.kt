@@ -49,10 +49,16 @@ class MathsQuizFragment : Fragment() {
         // and parse the JSON response into a List<Question>
         // For now, providing sample data
         return listOf(
-            Question(1, "What is 2 + 2?", listOf("3", "4", "5", "6"), 1),
-            Question(2, "What is 5 * 8?", listOf("35", "40", "45", "50"), 1),
-            Question(3, "What is 5 * 6?", listOf("30", "40", "45", "50"), 0),
-            Question(4, "What is 5 * 2?", listOf("10", "40", "45", "50"), 0),
+            Question(1, "Find the sum of 111 + 222 + 333?", listOf("700", "666", "10", "100"), 1),
+            Question(2, "Subtract 457 from 832", listOf("375", "57", "376", "960"), 0),
+            Question(3, "200 – (96 ÷ 4)?", listOf("105", "176", "26", "16"), 1),
+            Question(4, "Simplify :150 ÷ (6 + 3 x 8) - 5?", listOf("2", "5", "0", "None of these"), 0),
+            Question(5, "50 times of 8 is equal to?", listOf("80", "400", "800", "4000"), 1),
+            Question(6, "110 divided by 10 is?", listOf("11", "10", "5", "None of these"), 0),
+            Question(7, "20+(90÷2) is equal to?", listOf("50", "55", "65", "60"), 2),
+            Question(8, "The product of 82 and 5 is?", listOf("400", "410", "420", "None of these"), 1),
+            Question(9, "Find the missing terms in multiple of 3: 3, 6, 9, __, 15?", listOf("10", "11", "12", "13"), 2),
+            Question(10, "What is the next prime number after 5?", listOf("6", "7", "9", "11"), 1),
             // Add more questions here
         )
     }
