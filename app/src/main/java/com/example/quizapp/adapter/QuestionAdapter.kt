@@ -74,8 +74,10 @@ class QuestionAdapter(
                     else -> null
                 }
 
-                val isSelectedOption = question.selectedOptionIndex == i        // This line checks if the current option index (represented by i) is equal to the selectedOptionIndex of the question. It returns true if the current option is selected, and false otherwise.
-                val isCorrectOption = question.correctOptionIndex == i          // This line checks if the current option index (represented by i) is equal to the correctOptionIndex of the question. It returns true if the current option is the correct answer, and false otherwise.
+                val isSelectedOption =
+                    question.selectedOptionIndex == i        // This line checks if the current option index (represented by i) is equal to the selectedOptionIndex of the question. It returns true if the current option is selected, and false otherwise.
+                val isCorrectOption =
+                    question.correctOptionIndex == i          // This line checks if the current option index (represented by i) is equal to the correctOptionIndex of the question. It returns true if the current option is the correct answer, and false otherwise.
 
                 optionTextView?.apply {
                     setBackgroundResource(
@@ -91,7 +93,8 @@ class QuestionAdapter(
 
                     setTextColor(
                         ContextCompat.getColor(
-                            itemView.context, when {
+                            itemView.context,
+                            when {
                                 isSelectedOption -> {
                                     if (isCorrectOption) android.R.color.white
                                     else R.color.incorrect_option_text
