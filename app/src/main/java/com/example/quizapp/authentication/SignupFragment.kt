@@ -30,6 +30,11 @@ class SignupFragment : Fragment() {
         }
 
 
+        // redirect to home screen
+        binding.signupButton.setOnClickListener {
+            it.findNavController().navigate(R.id.action_signupFragment_to_homeFragment)
+        }
+
         return binding.root
     }
 
