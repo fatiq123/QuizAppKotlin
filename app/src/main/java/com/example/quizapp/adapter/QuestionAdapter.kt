@@ -39,7 +39,6 @@ class QuestionAdapter(
         private var option3: TextView = itemView.findViewById(R.id.tvOption3)
         private var option4: TextView = itemView.findViewById(R.id.tvOption4)
 
-
         fun bind(question: Question) {
             questionDescription.text = question.questionText
             option1.text = question.options[0]
@@ -47,99 +46,63 @@ class QuestionAdapter(
             option3.text = question.options[2]
             option4.text = question.options[3]
 
-            // Bind other options here if needed
-
-
-            option1.setOnClickListener {
-                onOptionClicked(question = question, 0)
-            }
-            option2.setOnClickListener {
-                onOptionClicked(question = question, 1)
-            }
-            option3.setOnClickListener {
-                onOptionClicked(question = question, 3)
-            }
-            option4.setOnClickListener {
-                onOptionClicked(question = question, 4)
-            }
-
-
-            // Determine if the current option is selected or not
-            val isSelectedOption = adapterPosition == question.selectedOptionIndex
-
-            // Check if the selected option is correct or not
-            val isCorrectOption = adapterPosition == question.correctOptionIndex
-
-            // Reset the background and text colors to their default state
-            resetViewColors()
-
+            // Set click listeners for each option TextView
+            option1.setOnClickListener { onOptionClicked(question, 0) }
+            option2.setOnClickListener { onOptionClicked(question, 1) }
+            option3.setOnClickListener { onOptionClicked(question, 2) }
+            option4.setOnClickListener { onOptionClicked(question, 3) }
 
             // Update the background and text colors based on the selection and correctness
-            itemView.setBackgroundResource(
-                if (question.selectedOptionIndex == adapterPosition) {
-                    if (question.selectedOptionIndex == question.correctOptionIndex) R.drawable.option_background_correct
-                    else R.drawable.option_background_incorrect
-                } else R.drawable.option_background_default
-            )
-
-            option1.setTextColor(
-                ContextCompat.getColor(
-                    itemView.context,
-                    if (question.selectedOptionIndex == adapterPosition) {
-                        if (question.selectedOptionIndex == question.correctOptionIndex) android.R.color.white
-                        else R.color.incorrect_option_text
-                    } else android.R.color.black
-                )
-            )
-
-            option2.setTextColor(
-                ContextCompat.getColor(
-                    itemView.context,
-                    if (question.selectedOptionIndex == adapterPosition) {
-                        if (question.selectedOptionIndex == question.correctOptionIndex) android.R.color.white
-                        else R.color.incorrect_option_text
-                    } else android.R.color.black
-                )
-            )
-
-            option3.setTextColor(
-                ContextCompat.getColor(
-                    itemView.context,
-                    if (question.selectedOptionIndex == adapterPosition) {
-                        if (question.selectedOptionIndex == question.correctOptionIndex) android.R.color.white
-                        else R.color.incorrect_option_text
-                    } else android.R.color.black
-                )
-            )
-
-            option4.setTextColor(
-                ContextCompat.getColor(
-                    itemView.context,
-                    if (question.selectedOptionIndex == adapterPosition) {
-                        if (question.selectedOptionIndex == question.correctOptionIndex) android.R.color.white
-                        else R.color.incorrect_option_text
-                    } else android.R.color.black
-                )
-            )
-
-            // Update other option TextViews if needed
+            updateViewColors(question)
         }
-
 
         private fun onOptionClicked(question: Question, optionIndex: Int) {
             // Update the selectedOptionIndex of the question when an option is clicked
             question.selectedOptionIndex = optionIndex
-            notifyDataSetChanged() // Notify adapter to update the view
+            // Notify adapter to update the view
+            notifyDataSetChanged()
         }
 
+        private fun updateViewColors(question: Question) {
+            // Loop through each option TextView and update their colors based on selection and correctness
+            for (i in questions.indices) {
+                val optionTextView = when (i) {
+                    0 -> option1
+                    1 -> option2
+                    2 -> option3
+                    3 -> option4
+                    else -> null
+                }
 
-        private fun resetViewColors() {
-            itemView.setBackgroundResource(R.drawable.option_background_default)
-            option1.setTextColor(ContextCompat.getColor(itemView.context, android.R.color.black))
-            option2.setTextColor(ContextCompat.getColor(itemView.context, android.R.color.black))
-            option3.setTextColor(ContextCompat.getColor(itemView.context, android.R.color.black))
-            option4.setTextColor(ContextCompat.getColor(itemView.context, android.R.color.black))
-            // Reset colors for other option TextViews if needed
+                val isSelectedOption = question.selectedOptionIndex == i
+                val isCorrectOption = question.correctOptionIndex == i
+
+                optionTextView?.apply {
+                    setBackgroundResource(
+                        when {
+                            isSelectedOption -> {
+                                if (isCorrectOption) R.drawable.option_background_correct
+                                else R.drawable.option_background_incorrect
+                            }
+
+                            else -> R.drawable.option_background_default
+                        }
+                    )
+
+                    setTextColor(
+                        ContextCompat.getColor(
+                            itemView.context, when {
+                                isSelectedOption -> {
+                                    if (isCorrectOption) android.R.color.white
+                                    else R.color.incorrect_option_text
+                                }
+
+                                else -> android.R.color.black
+                            }
+                        )
+                    )
+                }
+            }
         }
     }
 
