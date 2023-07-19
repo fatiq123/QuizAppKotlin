@@ -42,8 +42,10 @@ class HomeFragment : Fragment() {
         }
         recyclerView.adapter = categoryAdapter
 
+
+
         // Initialize NavController
-        navController = findNavController()
+        navController = findNavController() // this is very important
 
         return view
     }
@@ -68,6 +70,14 @@ class HomeFragment : Fragment() {
             }
             "Computer Science" -> {
                 val action = HomeFragmentDirections.actionHomeFragmentToComputerScienceFragment()
+                navController.navigate(action)
+            }
+            "History" -> {
+                val action = HomeFragmentDirections.actionHomeFragmentToHistoryFragment()
+                navController.navigate(action)
+            }
+            "Biology" -> {
+                val action = HomeFragmentDirections.actionHomeFragmentToBiologyFragment()
                 navController.navigate(action)
             }
         }

@@ -49,27 +49,27 @@
     </fragment>
     <fragment
         android:id="@+id/mathsQuizFragment"
-        android:name="com.example.quizapp.MathsQuizFragment"
+        android:name="com.example.quizapp.quizfragments.MathsQuizFragment"
         android:label="fragment_maths_quiz"
         tools:layout="@layout/fragment_maths_quiz" />
     <fragment
         android:id="@+id/physicsFragment"
-        android:name="com.example.quizapp.PhysicsFragment"
+        android:name="com.example.quizapp.quizfragments.PhysicsFragment"
         android:label="fragment_physics"
         tools:layout="@layout/fragment_physics" />
     <fragment
         android:id="@+id/computerScienceFragment"
-        android:name="com.example.quizapp.ComputerScienceFragment"
+        android:name="com.example.quizapp.quizfragments.ComputerScienceFragment"
         android:label="fragment_computer_science"
         tools:layout="@layout/fragment_computer_science" />
     <fragment
         android:id="@+id/historyFragment"
-        android:name="com.example.quizapp.HistoryFragment"
+        android:name="com.example.quizapp.quizfragments.HistoryFragment"
         android:label="fragment_history"
         tools:layout="@layout/fragment_history" />
     <fragment
         android:id="@+id/biologyFragment"
-        android:name="com.example.quizapp.BiologyFragment"
+        android:name="com.example.quizapp.quizfragments.BiologyFragment"
         android:label="fragment_biology"
         tools:layout="@layout/fragment_biology" />
 </navigation>
