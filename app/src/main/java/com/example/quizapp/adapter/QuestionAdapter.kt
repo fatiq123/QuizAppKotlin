@@ -5,7 +5,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.findViewTreeViewModelStoreOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.example.quizapp.R
 import com.example.quizapp.model.Question
@@ -51,7 +50,6 @@ class QuestionAdapter(
             // Bind other options here if needed
 
 
-
             option1.setOnClickListener {
                 onOptionClicked(question = question, 0)
             }
@@ -66,20 +64,20 @@ class QuestionAdapter(
             }
 
 
-
-
-
-
             // Determine if the current option is selected or not
             val isSelectedOption = adapterPosition == question.selectedOptionIndex
 
             // Check if the selected option is correct or not
             val isCorrectOption = adapterPosition == question.correctOptionIndex
 
-            // Update the background color and text color based on the selection and correctness
+            // Reset the background and text colors to their default state
+            resetViewColors()
+
+
+            // Update the background and text colors based on the selection and correctness
             itemView.setBackgroundResource(
-                if (isSelectedOption) {
-                    if (isCorrectOption) R.drawable.option_background_correct
+                if (question.selectedOptionIndex == adapterPosition) {
+                    if (question.selectedOptionIndex == question.correctOptionIndex) R.drawable.option_background_correct
                     else R.drawable.option_background_incorrect
                 } else R.drawable.option_background_default
             )
@@ -87,8 +85,8 @@ class QuestionAdapter(
             option1.setTextColor(
                 ContextCompat.getColor(
                     itemView.context,
-                    if (isSelectedOption) {
-                        if (isCorrectOption) android.R.color.white
+                    if (question.selectedOptionIndex == adapterPosition) {
+                        if (question.selectedOptionIndex == question.correctOptionIndex) android.R.color.white
                         else R.color.incorrect_option_text
                     } else android.R.color.black
                 )
@@ -97,28 +95,28 @@ class QuestionAdapter(
             option2.setTextColor(
                 ContextCompat.getColor(
                     itemView.context,
-                    if (isSelectedOption) {
-                        if (isCorrectOption) android.R.color.white
+                    if (question.selectedOptionIndex == adapterPosition) {
+                        if (question.selectedOptionIndex == question.correctOptionIndex) android.R.color.white
                         else R.color.incorrect_option_text
                     } else android.R.color.black
                 )
             )
 
-            option2.setTextColor(
+            option3.setTextColor(
                 ContextCompat.getColor(
                     itemView.context,
-                    if (isSelectedOption) {
-                        if (isCorrectOption) android.R.color.white
+                    if (question.selectedOptionIndex == adapterPosition) {
+                        if (question.selectedOptionIndex == question.correctOptionIndex) android.R.color.white
                         else R.color.incorrect_option_text
                     } else android.R.color.black
                 )
             )
 
-            option2.setTextColor(
+            option4.setTextColor(
                 ContextCompat.getColor(
                     itemView.context,
-                    if (isSelectedOption) {
-                        if (isCorrectOption) android.R.color.white
+                    if (question.selectedOptionIndex == adapterPosition) {
+                        if (question.selectedOptionIndex == question.correctOptionIndex) android.R.color.white
                         else R.color.incorrect_option_text
                     } else android.R.color.black
                 )
@@ -127,12 +125,23 @@ class QuestionAdapter(
             // Update other option TextViews if needed
         }
 
+
         private fun onOptionClicked(question: Question, optionIndex: Int) {
             // Update the selectedOptionIndex of the question when an option is clicked
             question.selectedOptionIndex = optionIndex
             notifyDataSetChanged() // Notify adapter to update the view
         }
+
+
+        private fun resetViewColors() {
+            itemView.setBackgroundResource(R.drawable.option_background_default)
+            option1.setTextColor(ContextCompat.getColor(itemView.context, android.R.color.black))
+            option2.setTextColor(ContextCompat.getColor(itemView.context, android.R.color.black))
+            option3.setTextColor(ContextCompat.getColor(itemView.context, android.R.color.black))
+            option4.setTextColor(ContextCompat.getColor(itemView.context, android.R.color.black))
+            // Reset colors for other option TextViews if needed
+        }
     }
 
-
 }
+

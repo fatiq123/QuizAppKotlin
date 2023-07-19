@@ -51,6 +51,8 @@ class MathsQuizFragment : Fragment() {
         return listOf(
             Question(1, "What is 2 + 2?", listOf("3", "4", "5", "6"), 1),
             Question(2, "What is 5 * 8?", listOf("35", "40", "45", "50"), 1),
+            Question(3, "What is 5 * 6?", listOf("30", "40", "45", "50"), 0),
+            Question(4, "What is 5 * 2?", listOf("10", "40", "45", "50"), 0),
             // Add more questions here
         )
     }

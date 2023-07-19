@@ -22,21 +22,25 @@
             android:textStyle="bold" />
 
         <TextView
+            android:layout_marginTop="10dp"
             android:id="@+id/tvOption1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
         <TextView
+            android:layout_marginTop="5dp"
             android:id="@+id/tvOption2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
         <TextView
+            android:layout_marginTop="5dp"
             android:id="@+id/tvOption3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
         <TextView
+            android:layout_marginTop="5dp"
             android:id="@+id/tvOption4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
