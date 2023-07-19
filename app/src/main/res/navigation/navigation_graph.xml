@@ -46,6 +46,9 @@
         <action
             android:id="@+id/action_homeFragment_to_biologyFragment"
             app:destination="@id/biologyFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_resultFragment"
+            app:destination="@id/resultFragment" />
     </fragment>
     <fragment
         android:id="@+id/mathsQuizFragment"
@@ -72,4 +75,16 @@
         android:name="com.example.quizapp.quizfragments.BiologyFragment"
         android:label="fragment_biology"
         tools:layout="@layout/fragment_biology" />
+    <fragment
+        android:id="@+id/resultFragment"
+        android:name="com.example.quizapp.ResultFragment"
+        android:label="fragment_result"
+        tools:layout="@layout/fragment_result">
+
+        <!-- Add argument for quizResult object -->
+        <argument
+            android:name="quizResult"
+            app:argType="com.example.quizapp.QuizResult" />
+    </fragment>
+
 </navigation>
