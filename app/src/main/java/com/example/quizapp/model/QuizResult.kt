@@ -9,6 +9,7 @@ data class QuizResult(
     val percentage: Float,
     val selectedAnswers: List<String>, // List of user's selected answers
     val correctAnswers: List<String> // List of correct answers
+
 ) : Parcelable {
 
     constructor(parcel: Parcel) : this(

@@ -89,23 +89,23 @@ class HomeFragment : Fragment() {
 
 
         // Collect user's selected answers and correct answers from the quiz fragment (replace this with your actual implementation)
-        val userSelectedAnswers = listOf("Option 1", "Option 3", "Option 2", "Option 4")
-        val correctAnswers = listOf("Correct", "Correct", "Correct", "Incorrect")
+        //val userSelectedAnswers = listOf("Option 1", "Option 3", "Option 2", "Option 4")
+        //val correctAnswers = listOf("Correct", "Correct", "Correct", "Incorrect")
 
         // Calculate the user's score and percentage
-        val userScore = calculateUserScore(userSelectedAnswers, correctAnswers)
-        val userPercentage = calculateUserPercentage(userScore, correctAnswers.size)
+        //val userScore = calculateUserScore(userSelectedAnswers, correctAnswers)
+        //val userPercentage = calculateUserPercentage(userScore, correctAnswers.size)
 
         // Create a QuizResult instance with the score, percentage, selected answers, and correct answers
-        val quizResult = QuizResult(
-            score = userScore,
-            percentage = userPercentage,
-            selectedAnswers = userSelectedAnswers,
-            correctAnswers = correctAnswers
-        )
+//        val quizResult = QuizResult(
+//            score = userScore,
+//            percentage = userPercentage,
+//            selectedAnswers = userSelectedAnswers,
+//            correctAnswers = correctAnswers
+//        )
 
         // Navigate to the ResultFragment and pass the QuizResult as an argument
-        navigateToResultFragment(quizResult = quizResult)
+        //navigateToResultFragment(quizResult = quizResult)
 
 
     }
@@ -141,9 +141,9 @@ class HomeFragment : Fragment() {
 
 
     // Function to navigate to the ResultFragment and pass the QuizResult as an argument
-    private fun navigateToResultFragment(quizResult: QuizResult) {
-        val action = HomeFragmentDirections.actionHomeFragmentToResultFragment(quizResult)
-        navController.navigate(action)
-    }
+//    private fun navigateToResultFragment(quizResult: QuizResult) {
+//        val action = HomeFragmentDirections.actionHomeFragmentToResultFragment()
+//        navController.navigate(action)
+//    }
 
 }
