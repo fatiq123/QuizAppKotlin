@@ -89,8 +89,8 @@ class HomeFragment : Fragment() {
 
 
         // Collect user's selected answers and correct answers from the quiz fragment (replace this with your actual implementation)
-        val userSelectedAnswers = listOf("Option 1", "Option 3", "Option 2", "Option 4", "Option 1")
-        val correctAnswers = listOf("Correct", "Correct", "Correct", "Incorrect", "Correct")
+        val userSelectedAnswers = listOf("Option 1", "Option 3", "Option 2", "Option 4")
+        val correctAnswers = listOf("Correct", "Correct", "Correct", "Incorrect")
 
         // Calculate the user's score and percentage
         val userScore = calculateUserScore(userSelectedAnswers, correctAnswers)

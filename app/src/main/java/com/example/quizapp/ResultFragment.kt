@@ -29,6 +29,7 @@ class ResultFragment : Fragment() {
         binding.scoreTextView.text = getString(R.string.score, quizResult?.score)
         binding.percentageTextView.text = getString(R.string.percentage, quizResult?.percentage)
 
+
         // Evaluate and display the user's selected answers and correct answers
         val selectedAnswers = quizResult?.selectedAnswers
         val correctAnswers = quizResult?.correctAnswers
