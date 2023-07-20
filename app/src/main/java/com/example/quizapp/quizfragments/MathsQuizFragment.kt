@@ -4,98 +4,167 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioButton
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
+import com.example.quizapp.Constants
 import com.example.quizapp.HomeFragmentDirections
 import com.example.quizapp.R
 import com.example.quizapp.adapter.QuestionAdapter
+import com.example.quizapp.databinding.FragmentMathsQuizBinding
 import com.example.quizapp.model.Question
 import com.example.quizapp.model.QuizResult
+import com.example.quizapp.viewmodel.QuizViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class MathsQuizFragment : Fragment() {
 
+    private lateinit var binding: FragmentMathsQuizBinding
+
     private lateinit var recyclerView: RecyclerView
     private lateinit var questionAdapter: QuestionAdapter
+    private val quizViewModel: QuizViewModel by viewModels()
+    private var questionsList: List<Question> = emptyList()
+    private var currentQuestionIndex = 0
+    private var result = 0
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
         // Inflate the layout for this fragment
-        val view =  inflater.inflate(R.layout.fragment_maths_quiz, container, false)
+        binding = FragmentMathsQuizBinding.inflate(inflater, container, false)
 
+        return binding.root
 
-
-        // Initialize recyclerView
-        recyclerView = view.findViewById(R.id.recyclerViewMathQuiz)
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
-
-
-        // Sample list of questions (replace with actual data retrieved from API)
-        val questions = getSampleQuestions()
-
-        // Set up the RecyclerView adapter
-        questionAdapter = QuestionAdapter(questions)
-        recyclerView.adapter = questionAdapter
-
-
-
-
-
-        // Function to handle quiz completion and navigation to the ResultFragment
-        fun onQuizCompleted(userSelectedAnswers: List<String>, correctAnswers: List<String>) {
-            // Calculate the user's score and percentage
-            val userScore = calculateUserScore(userSelectedAnswers = userSelectedAnswers, correctAnswers = correctAnswers)
-            val userPercentage = calculateUserPercentage(userScore = userScore, correctAnswers.size)
-
-
-            // Create a QuizResult instance with the score, percentage, selected answers, and correct answers
-            val quizResult = QuizResult(
-                score = userScore,
-                percentage = userPercentage,
-                selectedAnswers = userSelectedAnswers,
-                correctAnswers = correctAnswers
-            )
-
-            val action = MathsQuizFragmentDirections.actionMathsQuizFragmentToResultFragment(quizResult)
-            findNavController().navigate(action)
-
-
-
-//            val jsonString = quizResult.toJsonString()
+//        quizViewModel = ViewModelProvider(this)[QuizViewModel::class.java]
 //
-//            val action = MathsQuizFragmentDirections.actionMathsQuizFragmentToResultFragment(jsonString)
-//            findNavController().navigate(action)
+//
+//        // since we will reset the quiz many times so
+//        Constants.RESULT = 0
+//        Constants.TOTAL_QUESTIONS = 0
+//
+//
+//
+//
+//
+//
+//
+//        // Initialize recyclerView
+//        recyclerView = view.findViewById(R.id.mathQuizView)
+//        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+//
+//
+//
+//
+//
+//
+//        // Sample list of questions (replace with actual data retrieved from API)
+//        val questions = getSampleQuestions()
+//
+//        // Set up the RecyclerView adapter
+//        questionAdapter = QuestionAdapter(questions)
+//        recyclerView.adapter = questionAdapter
+//
+//
+//
+//
+//
+//        return view
+
+    }
+
+
+    @OptIn(DelicateCoroutinesApi::class)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
+        // displaying first question
+        GlobalScope.launch(Dispatchers.Main) {
+
+            quizViewModel.getQuestionsFromLiveData().observe(viewLifecycleOwner, Observer {
+
+                if (it.isNotEmpty()) {
+                    questionsList = it
+                    setupQuestion()
+                    setupNextButton()
+                }
+            })
+
+            binding.btnNext.setOnClickListener {
+                val selectedOption = binding.radioGroup.checkedRadioButtonId
+
+                if (selectedOption != -1) {
+                    val radioButton = view.findViewById<View>(selectedOption) as RadioButton
+
+                    questionsList.let {
+                        if (currentQuestionIndex < it.size) {
+                            // checking if it is correct or not
+                            if (radioButton.text.toString() == it[currentQuestionIndex].correct_option) {
+                                result++
+                                binding.tvResult.text = "Correct Answer: $result"
+                            }
+
+                            currentQuestionIndex++
+                            setupQuestion()
+
+                            // checking if it is the last question
+                            if (currentQuestionIndex == it.size - 1) {
+                                binding.btnNext.text = "Finish"
+                            }
+
+                            binding.radioGroup.clearCheck()
+                        } else {
+                            // Handle quiz finish here
+                            // You can navigate to the result fragment or activity here
+                        }
+                    }
+                } else {
+                    Toast.makeText(
+                        requireContext(),
+                        "Please Select One Option",
+                        Toast.LENGTH_LONG)
+                        .show()
+                }
+            }
+
+
+
         }
 
 
-
-
-
-
-
-        return view
-
     }
+
+
 
     private fun getSampleQuestions(): List<Question> {
         // Replace this with actual API call to retrieve questions from backend
         // and parse the JSON response into a List<Question>
         // For now, providing sample data
         return listOf(
-            Question(1, "Find the sum of 111 + 222 + 333?", listOf("700", "666", "10", "100"), 1),
-            Question(2, "Subtract 457 from 832", listOf("375", "57", "376", "960"), 0),
-            Question(3, "200 – (96 ÷ 4)?", listOf("105", "176", "26", "16"), 1),
-            Question(4, "Simplify :150 ÷ (6 + 3 x 8) - 5?", listOf("2", "5", "0", "None of these"), 0),
-            Question(5, "50 times of 8 is equal to?", listOf("80", "400", "800", "4000"), 1),
-            Question(6, "110 divided by 10 is?", listOf("11", "10", "5", "None of these"), 0),
-            Question(7, "20+(90÷2) is equal to?", listOf("50", "55", "65", "60"), 2),
-            Question(8, "The product of 82 and 5 is?", listOf("400", "410", "420", "None of these"), 1),
-            Question(9, "Find the missing terms in multiple of 3: 3, 6, 9, __, 15?", listOf("10", "11", "12", "13"), 2),
-            Question(10, "What is the next prime number after 5?", listOf("6", "7", "9", "11"), 1),
+//            Question(1, "Find the sum of 111 + 222 + 333?", listOf("700", "666", "10", "100"), 1),
+//            Question(2, "Subtract 457 from 832", listOf("375", "57", "376", "960"), 0),
+//            Question(3, "200 – (96 ÷ 4)?", listOf("105", "176", "26", "16"), 1),
+//            Question(4, "Simplify :150 ÷ (6 + 3 x 8) - 5?", listOf("2", "5", "0", "None of these"), 0),
+//            Question(5, "50 times of 8 is equal to?", listOf("80", "400", "800", "4000"), 1),
+//            Question(6, "110 divided by 10 is?", listOf("11", "10", "5", "None of these"), 0),
+//            Question(7, "20+(90÷2) is equal to?", listOf("50", "55", "65", "60"), 2),
+//            Question(8, "The product of 82 and 5 is?", listOf("400", "410", "420", "None of these"), 1),
+//            Question(9, "Find the missing terms in multiple of 3: 3, 6, 9, __, 15?", listOf("10", "11", "12", "13"), 2),
+//            Question(10, "What is the next prime number after 5?", listOf("6", "7", "9", "11"), 1),
             // Add more questions here
         )
     }
@@ -103,11 +172,61 @@ class MathsQuizFragment : Fragment() {
 
 
 
+    private fun setupQuestion() {
+        if (currentQuestionIndex < questionsList.size) {
+            val currentQuestion = questionsList[currentQuestionIndex]
+            binding.tvQuestion.text = currentQuestion.question
+            binding.option1.text = currentQuestion.option1
+            binding.option2.text = currentQuestion.option2
+            binding.option3.text = currentQuestion.option3
+            binding.option4.text = currentQuestion.option4
+            binding.tvResult.text = ""
+        }
+    }
 
+    private fun setupNextButton() {
+        binding.btnNext.setOnClickListener {
+            val selectedOption = binding.radioGroup.checkedRadioButtonId
 
+            if (selectedOption != -1) {
+                val radioButton = view?.findViewById<RadioButton>(selectedOption)
+                val selectedAnswer = radioButton?.text.toString()
+                val currentQuestion = questionsList[currentQuestionIndex]
 
+                // Check if the selected answer is correct
+                if (selectedAnswer == currentQuestion.correct_option) {
+                    result++
+                }
 
+                // Move to the next question or finish the quiz
+                if (currentQuestionIndex < questionsList.size - 1) {
+                    currentQuestionIndex++
+                    setupQuestion()
+                } else {
+                    // Finish the quiz and navigate to the result screen
+                    navigateToResultFragment()
+                }
 
+                // Clear the selected answer
+                binding.radioGroup.clearCheck()
+            } else {
+                Toast.makeText(requireContext(), "Please Select One Option", Toast.LENGTH_SHORT)
+                    .show()
+            }
+        }
+
+    }
+        private fun navigateToResultFragment() {
+            val quizResult = QuizResult(
+                score = result,
+                percentage = (result.toFloat() / questionsList.size.toFloat()) * 100,
+                selectedAnswers = emptyList(), // Replace this with the user's selected answers
+                correctAnswers = emptyList()  // Replace this with the correct answers
+            )
+
+            val action = MathsQuizFragmentDirections.actionMathsQuizFragmentToResultFragment(quizResult)
+            findNavController().navigate(action)
+        }
 
 
 
@@ -143,8 +262,8 @@ class MathsQuizFragment : Fragment() {
 
     //Function to navigate to the ResultFragment and pass the QuizResult as an argument
     private fun navigateToResultFragment(quizResult: QuizResult) {
-        val action = MathsQuizFragmentDirections.actionMathsQuizFragmentToResultFragment(quizResult = quizResult)
-        findNavController().navigate(action)
+//        val action = MathsQuizFragmentDirections.actionMathsQuizFragmentToResultFragment(quizResult = quizResult)
+//        findNavController().navigate(action)
     }
 
 }

@@ -1,89 +1,59 @@
 package com.example.quizapp
 
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.navArgs
-import com.example.quizapp.databinding.FragmentResultBinding
-import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.navArgs
 
+// TODO: Rename parameter arguments, choose names that match
+// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+private const val ARG_PARAM1 = "param1"
+private const val ARG_PARAM2 = "param2"
 
+/**
+ * A simple [Fragment] subclass.
+ * Use the [ResultFragment.newInstance] factory method to
+ * create an instance of this fragment.
+ */
 class ResultFragment : Fragment() {
+    // TODO: Rename and change types of parameters
+    private var param1: String? = null
+    private var param2: String? = null
 
-    private lateinit var binding: FragmentResultBinding
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            param1 = it.getString(ARG_PARAM1)
+            param2 = it.getString(ARG_PARAM2)
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentResultBinding.inflate(inflater, container, false)
-
-
-        // Retrieve the JSON string using Safe Args
-        val args: ResultFragmentArgs by navArgs()
-        val quizResult = args.quizResult
-
-//        // Convert the JSON string back to the QuizResult object
-//        val quizResult = QuizResult.fromJsonString(jsonString)
-
-
-        // For example:
-        binding.scoreTextView.text = getString(R.string.score, quizResult.score)
-        binding.percentageTextView.text = getString(R.string.percentage, quizResult.percentage)
-
-
-
-
-//        val quizResult = arguments?.getParcelable<QuizResult>("quizResult")
-//
-//        // Display the user's score and percentage
-//        binding.scoreTextView.text = getString(R.string.score, quizResult?.score)
-//        binding.percentageTextView.text = getString(R.string.percentage, quizResult?.percentage)
-//
-//
-//        // Evaluate and display the user's selected answers and correct answers
-//        val selectedAnswers = quizResult?.selectedAnswers
-//        val correctAnswers = quizResult?.correctAnswers
-//
-//        if (selectedAnswers != null && correctAnswers != null) {
-//            for (i in selectedAnswers.indices) {
-//                val selectedAnswer = selectedAnswers[i]
-//                val correctAnswer = correctAnswers[i]
-//
-//                val questionTextView = TextView(requireContext())
-//                questionTextView.text = "Q${i + 1}: $selectedAnswer"
-//
-//                val answerTextView = TextView(requireContext())
-//                answerTextView.text = "Correct Answer: $correctAnswer"
-//
-//                // Add the question and answer TextViews to your layout (LinearLayout, RecyclerView, etc.)
-//                binding.resultLayout.addView(questionTextView)
-//                binding.resultLayout.addView(answerTextView)
-//            }
-//        }
-
-
-
-        return binding.root
+        return inflater.inflate(R.layout.fragment_result, container, false)
     }
 
-
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//
-//
-//        // Receive the QuizResult from arguments
-//        val quizResult = arguments?.getParcelable<QuizResult>("quizResult")
-//
-//        // Use the quizResult object to display the user's score and other info in the fragment
-//        if (quizResult != null) {
-//            val userScore = quizResult.score
-//            val userPercentage = quizResult.percentage
-//            // Display the user's score and percentage in the ResultFragment
-//            // For example, update TextViews with the score and percentage
-//        }
-//    }
-
+    companion object {
+        /**
+         * Use this factory method to create a new instance of
+         * this fragment using the provided parameters.
+         *
+         * @param param1 Parameter 1.
+         * @param param2 Parameter 2.
+         * @return A new instance of fragment ResultFragment.
+         */
+        // TODO: Rename and change types and number of parameters
+        @JvmStatic
+        fun newInstance(param1: String, param2: String) =
+            ResultFragment().apply {
+                arguments = Bundle().apply {
+                    putString(ARG_PARAM1, param1)
+                    putString(ARG_PARAM2, param2)
+                }
+            }
+    }
 }
