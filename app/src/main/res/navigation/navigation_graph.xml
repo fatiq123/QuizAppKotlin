@@ -61,6 +61,7 @@
                 app:argType="com.example.quizapp.QuizResult"/>
 
         </action>
+
     </fragment>
     <fragment
         android:id="@+id/physicsFragment"

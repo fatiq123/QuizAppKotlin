@@ -1,14 +1,13 @@
 package com.example.quizapp
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.navigation.fragment.navArgs
 import com.example.quizapp.databinding.FragmentResultBinding
-import com.example.quizapp.model.QuizResult
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.navArgs
 
 
 class ResultFragment : Fragment() {
