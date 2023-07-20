@@ -53,16 +53,8 @@
         android:label="fragment_maths_quiz"
         tools:layout="@layout/fragment_maths_quiz" >
         <action
-            android:id="@+id/action_mathsQuizFragment_to_resultFragment"
-            app:destination="@id/resultFragment" >
-
-
-            <!-- Add argument for quizResult object -->
-            <argument
-                android:name="quizResult"
-                app:argType="com.example.quizapp.QuizResult" />
-
-        </action>
+            android:id="@+id/action_mathsQuizFragment_to_resultFragment3"
+            app:destination="@id/resultFragment" />
     </fragment>
     <fragment
         android:id="@+id/physicsFragment"

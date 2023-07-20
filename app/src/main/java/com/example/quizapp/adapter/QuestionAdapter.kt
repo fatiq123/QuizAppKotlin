@@ -40,11 +40,11 @@ class QuestionAdapter(
         private var option4: TextView = itemView.findViewById(R.id.tvOption4)
 
         fun bind(question: Question) {
-            questionDescription.text = question.questionText
-            option1.text = question.options[0]
-            option2.text = question.options[1]
-            option3.text = question.options[2]
-            option4.text = question.options[3]
+//            questionDescription.text = question.questionText
+//            option1.text = question.options[0]
+//            option2.text = question.options[1]
+//            option3.text = question.options[2]
+//            option4.text = question.options[3]
 
             // Set click listeners for each option TextView
             option1.setOnClickListener { onOptionClicked(question, 0) }
@@ -58,7 +58,7 @@ class QuestionAdapter(
 
         private fun onOptionClicked(question: Question, optionIndex: Int) {
             // Update the selectedOptionIndex of the question when an option is clicked
-            question.selectedOptionIndex = optionIndex
+ //           question.selectedOptionIndex = optionIndex
             // Notify adapter to update the view
             notifyDataSetChanged()
         }
@@ -74,37 +74,37 @@ class QuestionAdapter(
                     else -> null
                 }
 
-                val isSelectedOption =
-                    question.selectedOptionIndex == i        // This line checks if the current option index (represented by i) is equal to the selectedOptionIndex of the question. It returns true if the current option is selected, and false otherwise.
-                val isCorrectOption =
-                    question.correctOptionIndex == i          // This line checks if the current option index (represented by i) is equal to the correctOptionIndex of the question. It returns true if the current option is the correct answer, and false otherwise.
+//                val isSelectedOption =
+//                      question.selectedOptionIndex == i        // This line checks if the current option index (represented by i) is equal to the selectedOptionIndex of the question. It returns true if the current option is selected, and false otherwise.
+//                val isCorrectOption =
+//                       question.correctOptionIndex == i          // This line checks if the current option index (represented by i) is equal to the correctOptionIndex of the question. It returns true if the current option is the correct answer, and false otherwise.
 
-                optionTextView?.apply {
-                    setBackgroundResource(
-                        when {
-                            isSelectedOption -> {
-                                if (isCorrectOption) R.drawable.option_background_correct
-                                else R.drawable.option_background_incorrect
-                            }
-
-                            else -> R.drawable.option_background_default
-                        }
-                    )
-
-                    setTextColor(
-                        ContextCompat.getColor(
-                            itemView.context,
-                            when {
-                                isSelectedOption -> {
-                                    if (isCorrectOption) android.R.color.white
-                                    else R.color.incorrect_option_text
-                                }
-
-                                else -> android.R.color.black
-                            }
-                        )
-                    )
-                }
+//                optionTextView?.apply {
+//                    setBackgroundResource(
+//                        when {
+//                            isSelectedOption -> {
+//                                if (isCorrectOption) R.drawable.option_background_correct
+//                                else R.drawable.option_background_incorrect
+//                            }
+//
+//                            else -> R.drawable.option_background_default
+//                        }
+//                    )
+//
+//                    setTextColor(
+//                        ContextCompat.getColor(
+//                            itemView.context,
+//                            when {
+//                                isSelectedOption -> {
+//                                    if (isCorrectOption) android.R.color.white
+//                                    else R.color.incorrect_option_text
+//                                }
+//
+//                                else -> android.R.color.black
+//                            }
+//                        )
+//                    )
+//                }
             }
         }
     }

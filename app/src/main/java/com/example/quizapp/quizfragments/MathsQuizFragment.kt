@@ -34,7 +34,7 @@ class MathsQuizFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var questionAdapter: QuestionAdapter
-    private val quizViewModel: QuizViewModel by viewModels()
+    private lateinit var quizViewModel: QuizViewModel /*by viewModels()*/
     private var questionsList: List<Question> = emptyList()
     private var currentQuestionIndex = 0
     private var result = 0
@@ -47,9 +47,18 @@ class MathsQuizFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentMathsQuizBinding.inflate(inflater, container, false)
 
+
+        // when user clicks on result button then he will redirect to result fragment
+        binding.btnMathsQuizResult.setOnClickListener {
+            val action = MathsQuizFragmentDirections.actionMathsQuizFragmentToResultFragment3()
+            findNavController().navigate(action)
+        }
+
+        quizViewModel = ViewModelProvider(this)[QuizViewModel::class.java]
+
         return binding.root
 
-//        quizViewModel = ViewModelProvider(this)[QuizViewModel::class.java]
+
 //
 //
 //        // since we will reset the quiz many times so
@@ -87,66 +96,66 @@ class MathsQuizFragment : Fragment() {
     }
 
 
-    @OptIn(DelicateCoroutinesApi::class)
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-
-        // displaying first question
-        GlobalScope.launch(Dispatchers.Main) {
-
-            quizViewModel.getQuestionsFromLiveData().observe(viewLifecycleOwner, Observer {
-
-                if (it.isNotEmpty()) {
-                    questionsList = it
-                    setupQuestion()
-                    setupNextButton()
-                }
-            })
-
-            binding.btnNext.setOnClickListener {
-                val selectedOption = binding.radioGroup.checkedRadioButtonId
-
-                if (selectedOption != -1) {
-                    val radioButton = view.findViewById<View>(selectedOption) as RadioButton
-
-                    questionsList.let {
-                        if (currentQuestionIndex < it.size) {
-                            // checking if it is correct or not
-                            if (radioButton.text.toString() == it[currentQuestionIndex].correct_option) {
-                                result++
-                                binding.tvResult.text = "Correct Answer: $result"
-                            }
-
-                            currentQuestionIndex++
-                            setupQuestion()
-
-                            // checking if it is the last question
-                            if (currentQuestionIndex == it.size - 1) {
-                                binding.btnNext.text = "Finish"
-                            }
-
-                            binding.radioGroup.clearCheck()
-                        } else {
-                            // Handle quiz finish here
-                            // You can navigate to the result fragment or activity here
-                        }
-                    }
-                } else {
-                    Toast.makeText(
-                        requireContext(),
-                        "Please Select One Option",
-                        Toast.LENGTH_LONG)
-                        .show()
-                }
-            }
-
-
-
-        }
-
-
-    }
+//    @OptIn(DelicateCoroutinesApi::class)
+//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//        super.onViewCreated(view, savedInstanceState)
+//
+//
+//        // displaying first question
+//        GlobalScope.launch(Dispatchers.Main) {
+//
+//            quizViewModel.getQuestionsFromLiveData().observe(viewLifecycleOwner, Observer {
+//
+//                if (it.isNotEmpty()) {
+//                    questionsList = it
+//                    setupQuestion()
+//                    setupNextButton()
+//                }
+//            })
+//
+//            binding.btnNext.setOnClickListener {
+//                val selectedOption = binding.radioGroup.checkedRadioButtonId
+//
+//                if (selectedOption != -1) {
+//                    val radioButton = view.findViewById<View>(selectedOption) as RadioButton
+//
+//                    questionsList.let {
+//                        if (currentQuestionIndex < it.size) {
+//                            // checking if it is correct or not
+//                            if (radioButton.text.toString() == it[currentQuestionIndex].correct_option) {
+//                                result++
+//                                binding.tvResult.text = "Correct Answer: $result"
+//                            }
+//
+//                            currentQuestionIndex++
+//                            setupQuestion()
+//
+//                            // checking if it is the last question
+//                            if (currentQuestionIndex == it.size - 1) {
+//                                binding.btnNext.text = "Finish"
+//                            }
+//
+//                            binding.radioGroup.clearCheck()
+//                        } else {
+//                            // Handle quiz finish here
+//                            // You can navigate to the result fragment or activity here
+//                        }
+//                    }
+//                } else {
+//                    Toast.makeText(
+//                        requireContext(),
+//                        "Please Select One Option",
+//                        Toast.LENGTH_LONG)
+//                        .show()
+//                }
+//            }
+//
+//
+//
+//        }
+//
+//
+//    }
 
 
 
@@ -224,9 +233,24 @@ class MathsQuizFragment : Fragment() {
                 correctAnswers = emptyList()  // Replace this with the correct answers
             )
 
-            val action = MathsQuizFragmentDirections.actionMathsQuizFragmentToResultFragment(quizResult)
-            findNavController().navigate(action)
+
         }
+
+    private fun redirectToQuiz(selectedCategory: String) {
+        // Replace this with your logic to redirect the user to the selected quiz
+        // For example, you can use Navigation Component to navigate to the quiz fragment
+        // and pass the selectedCategory as an argument.
+        // val action = HomeFragmentDirections.actionHomeFragmentToQuizFragment(selectedCategory)
+        // navController.navigate(action)
+
+        when (selectedCategory) {
+            R.id.btnMathsQuizResult.toString() -> {
+                val action = MathsQuizFragmentDirections.actionMathsQuizFragmentToResultFragment3()
+                findNavController().navigate(action)
+            }
+
+        }
+    }
 
 
 
