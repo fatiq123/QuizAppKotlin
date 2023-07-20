@@ -60,8 +60,15 @@ class MathsQuizFragment : Fragment() {
                 correctAnswers = correctAnswers
             )
 
-            // Navigate to the ResultFragment and pass the QuizResult as an argument
-            navigateToResultFragment(quizResult)
+            val action = MathsQuizFragmentDirections.actionMathsQuizFragmentToResultFragment(quizResult)
+            findNavController().navigate(action)
+
+
+
+//            val jsonString = quizResult.toJsonString()
+//
+//            val action = MathsQuizFragmentDirections.actionMathsQuizFragmentToResultFragment(jsonString)
+//            findNavController().navigate(action)
         }
 
 
