@@ -9,9 +9,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
+import com.example.quizapp.HomeFragmentDirections
 import com.example.quizapp.R
 import com.example.quizapp.adapter.QuestionAdapter
 import com.example.quizapp.model.Question
+import com.example.quizapp.model.QuizResult
 
 class MathsQuizFragment : Fragment() {
 
@@ -40,6 +42,34 @@ class MathsQuizFragment : Fragment() {
         recyclerView.adapter = questionAdapter
 
 
+
+
+
+        // Function to handle quiz completion and navigation to the ResultFragment
+        fun onQuizCompleted(userSelectedAnswers: List<String>, correctAnswers: List<String>) {
+            // Calculate the user's score and percentage
+            val userScore = calculateUserScore(userSelectedAnswers = userSelectedAnswers, correctAnswers = correctAnswers)
+            val userPercentage = calculateUserPercentage(userScore = userScore, correctAnswers.size)
+
+
+            // Create a QuizResult instance with the score, percentage, selected answers, and correct answers
+            val quizResult = QuizResult(
+                score = userScore,
+                percentage = userPercentage,
+                selectedAnswers = userSelectedAnswers,
+                correctAnswers = correctAnswers
+            )
+
+            // Navigate to the ResultFragment and pass the QuizResult as an argument
+            navigateToResultFragment(quizResult)
+        }
+
+
+
+
+
+
+
         return view
 
     }
@@ -61,6 +91,53 @@ class MathsQuizFragment : Fragment() {
             Question(10, "What is the next prime number after 5?", listOf("6", "7", "9", "11"), 1),
             // Add more questions here
         )
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // Function to calculate the user's score based on selected answers and correct answers
+    private fun calculateUserScore(
+        userSelectedAnswers: List<String>,
+        correctAnswers: List<String>
+    ): Int {
+        var score = 0
+
+        // Iterate through the user's selected answers and correct answers
+        for (i in userSelectedAnswers.indices) {
+            // Compare each selected answer with the corresponding correct answer
+            // Increment the score if the answer is correct
+            if (userSelectedAnswers[i] == correctAnswers[i]) {
+                score++
+            }
+        }
+
+        return score
+    }
+
+    // Function to calculate the user's percentage based on the score and total number of questions
+    private fun calculateUserPercentage(userScore: Int, totalQuestions: Int): Float {
+        return (userScore.toFloat() / totalQuestions.toFloat()) * 100
+    }
+
+
+
+
+    //Function to navigate to the ResultFragment and pass the QuizResult as an argument
+    private fun navigateToResultFragment(quizResult: QuizResult) {
+        val action = MathsQuizFragmentDirections.actionMathsQuizFragmentToResultFragment(quizResult = quizResult)
+        findNavController().navigate(action)
     }
 
 }

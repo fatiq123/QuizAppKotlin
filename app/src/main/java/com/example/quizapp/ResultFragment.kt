@@ -22,34 +22,34 @@ class ResultFragment : Fragment() {
 
 
 
-//
-//        val quizResult = arguments?.getParcelable<QuizResult>("quizResult")
-//
-//        // Display the user's score and percentage
-//        binding.scoreTextView.text = getString(R.string.score, quizResult?.score)
-//        binding.percentageTextView.text = getString(R.string.percentage, quizResult?.percentage)
-//
-//
-//        // Evaluate and display the user's selected answers and correct answers
-//        val selectedAnswers = quizResult?.selectedAnswers
-//        val correctAnswers = quizResult?.correctAnswers
-//
-//        if (selectedAnswers != null && correctAnswers != null) {
-//            for (i in selectedAnswers.indices) {
-//                val selectedAnswer = selectedAnswers[i]
-//                val correctAnswer = correctAnswers[i]
-//
-//                val questionTextView = TextView(requireContext())
-//                questionTextView.text = "Q${i + 1}: $selectedAnswer"
-//
-//                val answerTextView = TextView(requireContext())
-//                answerTextView.text = "Correct Answer: $correctAnswer"
-//
-//                // Add the question and answer TextViews to your layout (LinearLayout, RecyclerView, etc.)
-//                binding.resultLayout.addView(questionTextView)
-//                binding.resultLayout.addView(answerTextView)
-//            }
-//        }
+
+        val quizResult = arguments?.getParcelable<QuizResult>("quizResult")
+
+        // Display the user's score and percentage
+        binding.scoreTextView.text = getString(R.string.score, quizResult?.score)
+        binding.percentageTextView.text = getString(R.string.percentage, quizResult?.percentage)
+
+
+        // Evaluate and display the user's selected answers and correct answers
+        val selectedAnswers = quizResult?.selectedAnswers
+        val correctAnswers = quizResult?.correctAnswers
+
+        if (selectedAnswers != null && correctAnswers != null) {
+            for (i in selectedAnswers.indices) {
+                val selectedAnswer = selectedAnswers[i]
+                val correctAnswer = correctAnswers[i]
+
+                val questionTextView = TextView(requireContext())
+                questionTextView.text = "Q${i + 1}: $selectedAnswer"
+
+                val answerTextView = TextView(requireContext())
+                answerTextView.text = "Correct Answer: $correctAnswer"
+
+                // Add the question and answer TextViews to your layout (LinearLayout, RecyclerView, etc.)
+                binding.resultLayout.addView(questionTextView)
+                binding.resultLayout.addView(answerTextView)
+            }
+        }
 
 
 

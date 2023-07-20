@@ -4,12 +4,12 @@ import android.os.Parcel
 import android.os.Parcelable
 
 
+
 data class QuizResult(
     val score: Int,
     val percentage: Float,
-    val selectedAnswers: List<String>, // List of user's selected answers
-    val correctAnswers: List<String> // List of correct answers
-
+    val selectedAnswers: List<String>,
+    val correctAnswers: List<String>
 ) : Parcelable {
 
     constructor(parcel: Parcel) : this(
@@ -39,18 +39,7 @@ data class QuizResult(
             return arrayOfNulls(size)
         }
     }
+
 }
 
-// Extension function to write List<String> to Parcel
-fun Parcel.writeStringList(list: List<String>) {
-    writeInt(list.size)
-    list.forEach { writeString(it) }
-}
 
-// Extension function to read List<String> from Parcel
-fun Parcel.readStringList(): List<String> {
-    val size = readInt()
-    return mutableListOf<String>().apply {
-        repeat(size) { add(readString() ?: "") }
-    }
-}
