@@ -38,7 +38,7 @@
 
                     <TextView
                         android:id="@+id/tvQuestion"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Ready for Challenge ?"
                         android:textColor="@color/black"
@@ -90,9 +90,11 @@
         <!-- TextView to display the result -->
         <Button
             android:id="@+id/btnNext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
             android:layout_marginTop="48dp"
+            android:textSize="30sp"
+            android:gravity="center"
             android:text="Next"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
@@ -101,12 +103,14 @@
 
         <TextView
             android:id="@+id/tvResult"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
             android:layout_marginTop="48dp"
             android:text="Correct: 0"
-            android:textColor="@color/black"
-            android:textSize="20sp"
+            android:gravity="center"
+            android:background="@drawable/option_background_correct"
+            android:textColor="@color/white"
+            android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
@@ -114,11 +118,13 @@
 
         <TextView
             android:id="@+id/tvIncorrect"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
             android:text="Incorrect: 0"
-            android:textColor="@color/black"
-            android:textSize="20sp"
+            android:gravity="center"
+            android:background="@drawable/option_background_incorrect"
+            android:textColor="@color/white"
+            android:textSize="30sp"
             app:layout_constraintBottom_toTopOf="@+id/btnMathsQuizResult"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"

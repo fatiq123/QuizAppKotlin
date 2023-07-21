@@ -63,11 +63,11 @@ class MathsQuizFragment : Fragment() {
                         // Check if the selected option is correct
                         if (radioButton.text.toString() == it[currentQuestionIndex].correct_option) {
                             result++
-                            binding.tvResult.text = "Correct Answer: $result"
+                            binding.tvResult.text = "Correct Answers: $result"
                         } else {
                             // Increment the incorrectAnswers and update the TextView
                             incorrectAnswers++
-                            binding.tvIncorrect.text = "Incorrect Answer: $incorrectAnswers"
+                            binding.tvIncorrect.text = "Incorrect Answers: $incorrectAnswers"
                         }
 
                         // Display the next question
