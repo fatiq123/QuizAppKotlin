@@ -28,7 +28,7 @@ class ResultFragment : Fragment() {
             val percentage = ResultFragmentArgs.fromBundle(it).percentage
 //            val totalQuestions = Constants.TOTAL_QUESTIONS // Total number of questions
 //            val incorrectAnswers = totalQuestions - score
-            val totalQuestions = ResultFragmentArgs.fromBundle(it).totalQuestions   // not working
+            //val totalQuestions = ResultFragmentArgs.fromBundle(it).totalQuestions   // not working
 
             // Display the score, percentage, and number of incorrect answers in TextViews
             binding.scoreTextView.text = getString(R.string.score, score)

@@ -37,7 +37,7 @@ class MathsQuizFragment : Fragment() {
     private var incorrectAnswers = 0
 
 
-    @OptIn(DelicateCoroutinesApi::class)
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -151,13 +151,17 @@ class MathsQuizFragment : Fragment() {
                     radioButton.setBackgroundColor(Color.TRANSPARENT)
                 }
             }
-        } else {
+        } else {        // there is no need of this else block as above code do the same thing
             // Handle the case when there are no more questions
             // For example, show a message or disable the "Next" button
             // You can also navigate to the ResultFragment here if needed
             // For example:
-           // val action = MathsQuizFragmentDirections.actionMathsQuizFragmentToResultFragment3( score = score, totalQuestions = percentage)
-           // findNavController().navigate(action)
+            val score = result
+            val totalQuestions = questionsList.size
+            val percentage = (result.toFloat() / totalQuestions.toFloat()) * 100
+
+            val action = MathsQuizFragmentDirections.actionMathsQuizFragmentToResultFragment3( score = score, percentage = percentage)
+            findNavController().navigate(action)
         }
 
 
@@ -182,27 +186,6 @@ class MathsQuizFragment : Fragment() {
 //            Question(10, "What is the next prime number after 5?", listOf("6", "7", "9", "11"), 1),
             // Add more questions here
         )
-    }
-
-
-        private fun navigateToResultFragment() {
-            val quizResult = QuizResult(
-                score = result,
-                percentage = (result.toFloat() / questionsList.size.toFloat()) * 100,
-                selectedAnswers = emptyList(), // Replace this with the user's selected answers
-                correctAnswers = emptyList()  // Replace this with the correct answers
-            )
-
-
-        }
-
-
-
-
-    //Function to navigate to the ResultFragment and pass the QuizResult as an argument
-    private fun navigateToResultFragment(quizResult: QuizResult) {
-//        val action = MathsQuizFragmentDirections.actionMathsQuizFragmentToResultFragment(quizResult = quizResult)
-//        findNavController().navigate(action)
     }
 
 }
