@@ -13,9 +13,11 @@ class QuizViewModel : ViewModel() {
 
     private val repository: QuizRepository = QuizRepository()
     private val questionsLiveData: MutableLiveData<List<Question>> = MutableLiveData()
+    private val questionsPhysicsLiveData: MutableLiveData<List<Question>> = MutableLiveData()
 
     init {
         fetchQuestions()
+        fetchPhysicsQuestions()
     }
 
     private fun fetchQuestions() {
@@ -25,8 +27,21 @@ class QuizViewModel : ViewModel() {
         }
     }
 
+
+    private fun fetchPhysicsQuestions() {
+        viewModelScope.launch {
+            val questions = repository.getPhysicsQuestionsFromAPI()
+            questionsLiveData.postValue(questions)
+        }
+    }
+
+
     fun getQuestionsFromLiveData(): LiveData<List<Question>> {
         return questionsLiveData
     }
 
+
+    fun getPhysicsQuestionsFromLiveData(): LiveData<List<Question>> {
+        return questionsPhysicsLiveData
+    }
 }

@@ -26,8 +26,6 @@ class PhysicsFragment : Fragment() {
 
     private lateinit var binding: FragmentPhysicsBinding
 
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var questionAdapter: QuestionAdapter
     private lateinit var quizViewModel: QuizViewModel /*by viewModels()*/
     private lateinit var questionsList: List<Question>
     private var currentQuestionIndex = 0
@@ -43,11 +41,22 @@ class PhysicsFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentPhysicsBinding.inflate(inflater, container, false)
 
+
+        return binding.root
+
+
+    }
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
         // Initialize the ViewModel
         quizViewModel = ViewModelProvider(this)[QuizViewModel::class.java]
 
         // Observe the LiveData for questions and update UI when data is available
-        quizViewModel.getQuestionsFromLiveData().observe(viewLifecycleOwner, Observer { questions ->
+        quizViewModel.getPhysicsQuestionsFromLiveData().observe(viewLifecycleOwner, Observer { questions ->
             if (questions.isNotEmpty()) {
                 questionsList = questions
                 displayQuestion()
@@ -86,15 +95,15 @@ class PhysicsFragment : Fragment() {
 
 
                         // After a brief delay, reset the background color to the default color
-                        Handler(Looper.getMainLooper()).postDelayed({
-                            binding.radioGroup.clearCheck()
-                            radioButton.setBackgroundResource(android.R.drawable.btn_default)
-                            displayQuestion()
-                        }, 1000)
+//                        Handler(Looper.getMainLooper()).postDelayed({
+//                            binding.radioGroup.clearCheck()
+//                            radioButton.setBackgroundResource(android.R.drawable.btn_default)
+//                            displayQuestion()
+//                        }, 1000)
 
 //                        // Display the next question
                         currentQuestionIndex++
-//                        displayQuestion()
+                        displayQuestion()
 
                         // Checking if it is the last question
                         if (currentQuestionIndex == it.size - 1) {
@@ -109,10 +118,10 @@ class PhysicsFragment : Fragment() {
                         val totalQuestions = questionsList.size
                         val percentage = (result.toFloat() / totalQuestions.toFloat()) * 100
 
-                        // Handle navigation to the ResultFragment here
-                        val action = MathsQuizFragmentDirections.actionMathsQuizFragmentToResultFragment3(
-                            score = score, percentage = percentage)
-                        findNavController().navigate(action)
+//                        // Handle navigation to the ResultFragment here
+//                        val action = MathsQuizFragmentDirections.actionMathsQuizFragmentToResultFragment3(
+//                            score = score, percentage = percentage)
+//                        findNavController().navigate(action)
                     }
                 }
             } else {
@@ -125,17 +134,13 @@ class PhysicsFragment : Fragment() {
         }
 
 
-
-        return binding.root
-
-
     }
 
 
     private fun displayQuestion() {
         if (currentQuestionIndex < questionsList.size) {
             binding.apply {
-                tvQuestion.text = "Question ${currentQuestionIndex + 1}: " + questionsList[currentQuestionIndex].question
+                tvPhysicsQuestion.text = "Question ${currentQuestionIndex + 1}: " + questionsList[currentQuestionIndex].question
                 radio1.text = questionsList[currentQuestionIndex].option1
                 radio2.text = questionsList[currentQuestionIndex].option2
                 radio3.text = questionsList[currentQuestionIndex].option3
@@ -144,22 +149,11 @@ class PhysicsFragment : Fragment() {
 
                 // Existing code to display the next question...
                 // Reset background color of all radio buttons to default
-                for (i in 0 until binding.radioGroup.childCount) {
-                    val radioButton = binding.radioGroup.getChildAt(i) as RadioButton
-                    radioButton.setBackgroundColor(Color.TRANSPARENT)
-                }
+//                for (i in 0 until binding.radioGroup.childCount) {
+//                    val radioButton = binding.radioGroup.getChildAt(i) as RadioButton
+//                    radioButton.setBackgroundColor(Color.TRANSPARENT)
+//                }
             }
-        } else {        // there is no need of this else block as above code do the same thing
-            // Handle the case when there are no more questions
-            // For example, show a message or disable the "Next" button
-            // You can also navigate to the ResultFragment here if needed
-            // For example:
-            val score = result
-            val totalQuestions = questionsList.size
-            val percentage = (result.toFloat() / totalQuestions.toFloat()) * 100
-
-            val action = MathsQuizFragmentDirections.actionMathsQuizFragmentToResultFragment3( score = score, percentage = percentage)
-            findNavController().navigate(action)
         }
 
 

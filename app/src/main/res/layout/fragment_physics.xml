@@ -6,7 +6,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".quizfragments.MathsQuizFragment">
+        tools:context=".quizfragments.PhysicsFragment">
 
         <!-- CardView to display the question and options -->
         <androidx.cardview.widget.CardView
@@ -37,7 +37,7 @@
                     app:cardPreventCornerOverlap="true">
 
                     <TextView
-                        android:id="@+id/tvQuestion"
+                        android:id="@+id/tvPhysicsQuestion"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Ready for Challenge ?"

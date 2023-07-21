@@ -30,4 +30,16 @@ class QuizRepository {
         }
     }
 
+    suspend fun getPhysicsQuestionsFromAPI(): List<Question> {
+        return withContext(Dispatchers.IO) {
+            val response = questionsAPI.getPhysicsQuestions()
+            if (response.isSuccessful) {
+                response.body() ?: emptyList()
+            } else {
+                emptyList()
+            }
+        }
+    }
+
+
 }
