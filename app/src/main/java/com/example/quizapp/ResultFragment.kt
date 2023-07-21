@@ -15,7 +15,6 @@ import com.example.quizapp.viewmodel.QuizViewModel
 class ResultFragment : Fragment() {
 
     private lateinit var binding: FragmentResultBinding
-    private var quizResult: QuizResult? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,16 +25,19 @@ class ResultFragment : Fragment() {
           // Get the arguments from the bundle
         arguments?.let {
             val score = ResultFragmentArgs.fromBundle(it).score
-            val percentage = ResultFragmentArgs.fromBundle(it).totalQuestions
+            val percentage = ResultFragmentArgs.fromBundle(it).percentage
+            val totalQuestions = Constants.TOTAL_QUESTIONS // Total number of questions
+            val incorrectAnswers = totalQuestions - score
 
-            // Display the score and percentage in TextViews
+            // Display the score, percentage, and number of incorrect answers in TextViews
             binding.scoreTextView.text = getString(R.string.score, score)
             binding.percentageTextView.text = getString(R.string.percentage, percentage)
+            //binding.incorrectTextView.text = getString(R.string.incorrect_answers, incorrectAnswers)
 
             // Set click listener for the "Finish" button
             binding.btnFinish.setOnClickListener {
-                // Navigate back to the HomeFragment
-                findNavController().navigateUp()
+                // Navigate back to the HomeFragment using the action ID
+                findNavController().navigate(R.id.action_resultFragment_to_homeFragment)
             }
         }
 

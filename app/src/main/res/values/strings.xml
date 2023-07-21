@@ -15,4 +15,5 @@
 
     <string name="score">Score: %1$d</string>
     <string name="percentage">Percentage: %1$.2f%%</string>
+    <string name="incorrect_answers">Incorrect Answers: %1$d</string>
 </resources>

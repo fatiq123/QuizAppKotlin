@@ -29,6 +29,7 @@ class MathsQuizFragment : Fragment() {
     private lateinit var questionsList: List<Question>
     private var currentQuestionIndex = 0
     private var result = 0
+    private var incorrectAnswers = 0
 
 
     @OptIn(DelicateCoroutinesApi::class)
@@ -63,6 +64,10 @@ class MathsQuizFragment : Fragment() {
                         if (radioButton.text.toString() == it[currentQuestionIndex].correct_option) {
                             result++
                             binding.tvResult.text = "Correct Answer: $result"
+                        } else {
+                            // Increment the incorrectAnswers and update the TextView
+                            incorrectAnswers++
+                            binding.tvIncorrect.text = "Incorrect Answer: $incorrectAnswers"
                         }
 
                         // Display the next question
@@ -83,7 +88,7 @@ class MathsQuizFragment : Fragment() {
 
                         // Handle navigation to the ResultFragment here
                         val action = MathsQuizFragmentDirections.actionMathsQuizFragmentToResultFragment3(
-                            score = score, totalQuestions = percentage)
+                            score = score, percentage = percentage)
                         findNavController().navigate(action)
                     }
                 }
@@ -155,31 +160,6 @@ class MathsQuizFragment : Fragment() {
 
 
         }
-
-
-    // Function to calculate the user's score based on selected answers and correct answers
-    private fun calculateUserScore(
-        userSelectedAnswers: List<String>,
-        correctAnswers: List<String>
-    ): Int {
-        var score = 0
-
-        // Iterate through the user's selected answers and correct answers
-        for (i in userSelectedAnswers.indices) {
-            // Compare each selected answer with the corresponding correct answer
-            // Increment the score if the answer is correct
-            if (userSelectedAnswers[i] == correctAnswers[i]) {
-                score++
-            }
-        }
-
-        return score
-    }
-
-    // Function to calculate the user's percentage based on the score and total number of questions
-    private fun calculateUserPercentage(userScore: Int, totalQuestions: Int): Float {
-        return (userScore.toFloat() / totalQuestions.toFloat()) * 100
-    }
 
 
 

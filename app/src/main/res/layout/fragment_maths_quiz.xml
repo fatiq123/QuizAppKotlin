@@ -28,13 +28,13 @@
 
 
                 <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_margin="0dp"
+                    app:cardBackgroundColor="@color/cardview_light_background"
                     app:cardCornerRadius="10dp"
                     app:cardElevation="10dp"
-                    app:cardBackgroundColor="@color/cardview_light_background"
-                    app:cardPreventCornerOverlap="true"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    app:cardPreventCornerOverlap="true">
 
                     <TextView
                         android:id="@+id/tvQuestion"
@@ -45,7 +45,6 @@
                         android:textSize="30sp" />
 
                 </androidx.cardview.widget.CardView>
-
 
 
                 <RadioGroup
@@ -105,13 +104,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="48dp"
-            android:text="Correct"
+            android:text="Correct: 0"
             android:textColor="@color/black"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/btnNext" />
+
+        <TextView
+            android:id="@+id/tvIncorrect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Incorrect: 0"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/btnMathsQuizResult"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvResult" />
 
         <Button
             android:id="@+id/btnMathsQuizResult"
@@ -124,7 +136,7 @@
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvResult"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="0.246" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
