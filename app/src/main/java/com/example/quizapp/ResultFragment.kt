@@ -42,10 +42,4 @@ class ResultFragment : Fragment() {
         return binding.root
     }
 
-
-    // Calculate the percentage
-    private fun calculatePercentage(score: Int, totalQuestions: Int): Int {
-        return (score.toFloat() / totalQuestions.toFloat() * 100).toInt()
-    }
-
 }
