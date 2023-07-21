@@ -56,12 +56,12 @@
             android:id="@+id/action_mathsQuizFragment_to_resultFragment3"
             app:destination="@id/resultFragment" >
 
-            <argument
-                android:name="score"
-                app:argType="integer" />
-            <argument
-                android:name="totalQuestions"
-                app:argType="integer" />
+<!--            <argument-->
+<!--                android:name="score"-->
+<!--                app:argType="integer" />-->
+<!--            <argument-->
+<!--                android:name="totalQuestions"-->
+<!--                app:argType="integer" />-->
 
         </action>
     </fragment>
@@ -96,7 +96,7 @@
             app:argType="integer" />
         <argument
             android:name="totalQuestions"
-            app:argType="integer" />
+            app:argType="float" />
 
     </fragment>
 

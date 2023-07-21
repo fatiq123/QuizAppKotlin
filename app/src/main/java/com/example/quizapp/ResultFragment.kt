@@ -23,53 +23,20 @@ class ResultFragment : Fragment() {
     ): View? {
         binding = FragmentResultBinding.inflate(inflater, container, false)
 
-//        // Get the quiz result data from the arguments
-//        arguments?.let {
-//            val args = ResultFragmentArgs.fromBundle(it)
-//            quizResult = args.quizResult
-//
-//        }
-//
-//        // Display the score and percentage in TextViews
-//        binding.scoreTextView.text = getString(R.string.score, quizResult?.score)
-//        binding.percentageTextView.text = getString(R.string.percentage, quizResult?.percentage)
-//
-//        // Set click listener for the "Finish" button
-//        binding.btnFinish.setOnClickListener {
-//            // Navigate back to the HomeFragment
-//            findNavController().navigateUp()
-//        }
+          // Get the arguments from the bundle
+        arguments?.let {
+            val score = ResultFragmentArgs.fromBundle(it).score
+            val percentage = ResultFragmentArgs.fromBundle(it).totalQuestions
 
+            // Display the score and percentage in TextViews
+            binding.scoreTextView.text = getString(R.string.score, score)
+            binding.percentageTextView.text = getString(R.string.percentage, percentage)
 
-//
-//        // Get the result data from the QuizViewModel or any other appropriate source
-//        val result = QuizViewModel.getResult() // Replace QuizViewModel with the actual ViewModel class
-//
-//        // Display the result in TextView
-//        binding.scoreTextView.text = "Your Score is: ${result.score}/${result.totalQuestions}"
-//
-//        // Set click listener for the "Back" button
-//        binding.btnFinish.setOnClickListener {
-//            // Navigate back to the HomeFragment or the appropriate destination
-//            findNavController().popBackStack() // This will navigate back to the previous fragment
-//        }
-
-
-
-
-        // Get the score and totalQuestions from the arguments
-        val score = arguments?.getInt("score", 0) ?: 0
-        val totalQuestions = arguments?.getInt("totalQuestions", 0) ?: 0
-
-        // Display the score and percentage in TextViews
-        binding.scoreTextView.text = getString(R.string.score, score)
-        Log.i("Tag", "problem here")
-        binding.percentageTextView.text = getString(R.string.percentage, calculatePercentage(score, totalQuestions))
-
-        // Set click listener for the "Finish" button
-        binding.btnFinish.setOnClickListener {
-            // Navigate back to the HomeFragment
-            findNavController().navigateUp()
+            // Set click listener for the "Finish" button
+            binding.btnFinish.setOnClickListener {
+                // Navigate back to the HomeFragment
+                findNavController().navigateUp()
+            }
         }
 
         return binding.root

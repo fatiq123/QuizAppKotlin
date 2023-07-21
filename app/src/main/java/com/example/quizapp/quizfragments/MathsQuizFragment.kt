@@ -7,26 +7,17 @@ import android.view.ViewGroup
 import android.widget.RadioButton
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.example.quizapp.Constants
-import com.example.quizapp.HomeFragmentDirections
-import com.example.quizapp.R
 import com.example.quizapp.adapter.QuestionAdapter
 import com.example.quizapp.databinding.FragmentMathsQuizBinding
 import com.example.quizapp.model.Question
 import com.example.quizapp.model.QuizResult
 import com.example.quizapp.viewmodel.QuizViewModel
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 class MathsQuizFragment : Fragment() {
 
@@ -85,8 +76,14 @@ class MathsQuizFragment : Fragment() {
 
                         binding.radioGroup.clearCheck()
                     } else {
+
+                        val score = result
+                        val totalQuestions = questionsList.size
+                        val percentage = (result.toFloat() / totalQuestions.toFloat()) * 100
+
                         // Handle navigation to the ResultFragment here
-                        val action = MathsQuizFragmentDirections.actionMathsQuizFragmentToResultFragment3(score = result, totalQuestions = Constants.TOTAL_QUESTIONS)
+                        val action = MathsQuizFragmentDirections.actionMathsQuizFragmentToResultFragment3(
+                            score = score, totalQuestions = percentage)
                         findNavController().navigate(action)
                     }
                 }
@@ -121,8 +118,8 @@ class MathsQuizFragment : Fragment() {
             // For example, show a message or disable the "Next" button
             // You can also navigate to the ResultFragment here if needed
             // For example:
-            val action = MathsQuizFragmentDirections.actionMathsQuizFragmentToResultFragment3(score = result, totalQuestions = Constants.TOTAL_QUESTIONS)
-            findNavController().navigate(action)
+           // val action = MathsQuizFragmentDirections.actionMathsQuizFragmentToResultFragment3( score = score, totalQuestions = percentage)
+           // findNavController().navigate(action)
         }
     }
 
