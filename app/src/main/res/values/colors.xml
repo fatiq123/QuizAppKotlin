@@ -2,5 +2,6 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="incorrect_option_text">#FF0000</color> <!-- Red color -->
+    <color name="incorrect_option_text">#FF0000</color> <!-- Red color for incorrect option -->
+    <color name="correct_Option_text">#00FF00</color> <!-- Green color for correct option -->
 </resources>
