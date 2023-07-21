@@ -35,11 +35,12 @@ class MathsQuizFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var questionAdapter: QuestionAdapter
     private lateinit var quizViewModel: QuizViewModel /*by viewModels()*/
-    private var questionsList: List<Question> = emptyList()
+    private lateinit var questionsList: List<Question>
     private var currentQuestionIndex = 0
     private var result = 0
 
 
+    @OptIn(DelicateCoroutinesApi::class)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -47,14 +48,56 @@ class MathsQuizFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentMathsQuizBinding.inflate(inflater, container, false)
 
-
-        // when user clicks on result button then he will redirect to result fragment
-        binding.btnMathsQuizResult.setOnClickListener {
-            val action = MathsQuizFragmentDirections.actionMathsQuizFragmentToResultFragment3()
-            findNavController().navigate(action)
-        }
-
+        // Initialize the ViewModel
         quizViewModel = ViewModelProvider(this)[QuizViewModel::class.java]
+
+        // Observe the LiveData for questions and update UI when data is available
+        quizViewModel.getQuestionsFromLiveData().observe(viewLifecycleOwner, Observer { questions ->
+            if (questions.isNotEmpty()) {
+                questionsList = questions
+                displayQuestion()
+            }
+        })
+
+        // Set a click listener on the "Next" button
+        binding.btnNext.setOnClickListener {
+            val selectedOption = binding.radioGroup.checkedRadioButtonId
+
+            if (selectedOption != -1) {
+                val radioButton = view?.findViewById<View>(selectedOption) as RadioButton
+
+                questionsList.let {
+                    if (currentQuestionIndex < it.size) {
+                        // Check if the selected option is correct
+                        if (radioButton.text.toString() == it[currentQuestionIndex].correct_option) {
+                            result++
+                            binding.tvResult.text = "Correct Answer: $result"
+                        }
+
+                        // Display the next question
+                        currentQuestionIndex++
+                        displayQuestion()
+
+                        // Checking if it is the last question
+                        if (currentQuestionIndex == it.size - 1) {
+                            binding.btnNext.text = "Finish"
+                        }
+
+                        binding.radioGroup.clearCheck()
+                    } else {
+                        // Handle navigation to the ResultFragment here
+                        val action = MathsQuizFragmentDirections.actionMathsQuizFragmentToResultFragment3()
+                        findNavController().navigate(action)
+                    }
+                }
+            } else {
+                Toast.makeText(
+                    requireContext(),
+                    "Please Select One Option",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        }
 
         return binding.root
 
@@ -94,6 +137,34 @@ class MathsQuizFragment : Fragment() {
 //        return view
 
     }
+
+
+    private fun displayQuestion() {
+        if (currentQuestionIndex < questionsList.size) {
+            binding.apply {
+                tvQuestion.text = "Question ${currentQuestionIndex + 1}: " + questionsList[currentQuestionIndex].question
+                radio1.text = questionsList[currentQuestionIndex].option1
+                radio2.text = questionsList[currentQuestionIndex].option2
+                radio3.text = questionsList[currentQuestionIndex].option3
+                radio4.text = questionsList[currentQuestionIndex].option4
+            }
+        } else {
+            // Handle the case when there are no more questions
+            // For example, show a message or disable the "Next" button
+            // You can also navigate to the ResultFragment here if needed
+            // For example:
+            val action = MathsQuizFragmentDirections.actionMathsQuizFragmentToResultFragment3()
+            findNavController().navigate(action)
+        }
+    }
+
+//    @OptIn(DelicateCoroutinesApi::class)
+//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//        super.onViewCreated(view, savedInstanceState)
+//
+//
+//
+//    }
 
 
 //    @OptIn(DelicateCoroutinesApi::class)
@@ -181,50 +252,50 @@ class MathsQuizFragment : Fragment() {
 
 
 
-    private fun setupQuestion() {
-        if (currentQuestionIndex < questionsList.size) {
-            val currentQuestion = questionsList[currentQuestionIndex]
-            binding.tvQuestion.text = currentQuestion.question
-            binding.option1.text = currentQuestion.option1
-            binding.option2.text = currentQuestion.option2
-            binding.option3.text = currentQuestion.option3
-            binding.option4.text = currentQuestion.option4
-            binding.tvResult.text = ""
-        }
-    }
+//    private fun setupQuestion() {
+//        if (currentQuestionIndex < questionsList.size) {
+//            val currentQuestion = questionsList[currentQuestionIndex]
+//            binding.tvQuestion.text = currentQuestion.question
+//            binding.option1.text = currentQuestion.option1
+//            binding.option2.text = currentQuestion.option2
+//            binding.option3.text = currentQuestion.option3
+//            binding.option4.text = currentQuestion.option4
+//            binding.tvResult.text = ""
+//        }
+//    }
 
-    private fun setupNextButton() {
-        binding.btnNext.setOnClickListener {
-            val selectedOption = binding.radioGroup.checkedRadioButtonId
-
-            if (selectedOption != -1) {
-                val radioButton = view?.findViewById<RadioButton>(selectedOption)
-                val selectedAnswer = radioButton?.text.toString()
-                val currentQuestion = questionsList[currentQuestionIndex]
-
-                // Check if the selected answer is correct
-                if (selectedAnswer == currentQuestion.correct_option) {
-                    result++
-                }
-
-                // Move to the next question or finish the quiz
-                if (currentQuestionIndex < questionsList.size - 1) {
-                    currentQuestionIndex++
-                    setupQuestion()
-                } else {
-                    // Finish the quiz and navigate to the result screen
-                    navigateToResultFragment()
-                }
-
-                // Clear the selected answer
-                binding.radioGroup.clearCheck()
-            } else {
-                Toast.makeText(requireContext(), "Please Select One Option", Toast.LENGTH_SHORT)
-                    .show()
-            }
-        }
-
-    }
+//    private fun setupNextButton() {
+//        binding.btnNext.setOnClickListener {
+//            val selectedOption = binding.radioGroup.checkedRadioButtonId
+//
+//            if (selectedOption != -1) {
+//                val radioButton = view?.findViewById<RadioButton>(selectedOption)
+//                val selectedAnswer = radioButton?.text.toString()
+//                val currentQuestion = questionsList[currentQuestionIndex]
+//
+//                // Check if the selected answer is correct
+//                if (selectedAnswer == currentQuestion.correct_option) {
+//                    result++
+//                }
+//
+//                // Move to the next question or finish the quiz
+//                if (currentQuestionIndex < questionsList.size - 1) {
+//                    currentQuestionIndex++
+//                    setupQuestion()
+//                } else {
+//                    // Finish the quiz and navigate to the result screen
+//                    navigateToResultFragment()
+//                }
+//
+//                // Clear the selected answer
+//                binding.radioGroup.clearCheck()
+//            } else {
+//                Toast.makeText(requireContext(), "Please Select One Option", Toast.LENGTH_SHORT)
+//                    .show()
+//            }
+//        }
+//
+//    }
         private fun navigateToResultFragment() {
             val quizResult = QuizResult(
                 score = result,

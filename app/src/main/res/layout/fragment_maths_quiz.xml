@@ -41,28 +41,28 @@
                     android:layout_marginTop="10dp">
 
                     <RadioButton
-                        android:id="@+id/option1"
+                        android:id="@+id/radio1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=""
                         android:textSize="18sp" />
 
                     <RadioButton
-                        android:id="@+id/option2"
+                        android:id="@+id/radio2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=""
                         android:textSize="18sp" />
 
                     <RadioButton
-                        android:id="@+id/option3"
+                        android:id="@+id/radio3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=""
                         android:textSize="18sp" />
 
                     <RadioButton
-                        android:id="@+id/option4"
+                        android:id="@+id/radio4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=""
