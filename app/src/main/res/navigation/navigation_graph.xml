@@ -54,7 +54,16 @@
         tools:layout="@layout/fragment_maths_quiz" >
         <action
             android:id="@+id/action_mathsQuizFragment_to_resultFragment3"
-            app:destination="@id/resultFragment" />
+            app:destination="@id/resultFragment" >
+
+            <argument
+                android:name="score"
+                app:argType="integer" />
+            <argument
+                android:name="totalQuestions"
+                app:argType="integer" />
+
+        </action>
     </fragment>
     <fragment
         android:id="@+id/physicsFragment"
@@ -80,6 +89,15 @@
         android:id="@+id/resultFragment"
         android:name="com.example.quizapp.ResultFragment"
         android:label="fragment_result"
-        tools:layout="@layout/fragment_result" />
+        tools:layout="@layout/fragment_result" >
+
+        <argument
+            android:name="score"
+            app:argType="integer" />
+        <argument
+            android:name="totalQuestions"
+            app:argType="integer" />
+
+    </fragment>
 
 </navigation>
