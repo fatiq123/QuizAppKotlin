@@ -26,13 +26,14 @@ class ResultFragment : Fragment() {
         arguments?.let {
             val score = ResultFragmentArgs.fromBundle(it).score
             val percentage = ResultFragmentArgs.fromBundle(it).percentage
-            val totalQuestions = Constants.TOTAL_QUESTIONS // Total number of questions
-            val incorrectAnswers = totalQuestions - score
+//            val totalQuestions = Constants.TOTAL_QUESTIONS // Total number of questions
+//            val incorrectAnswers = totalQuestions - score
+            val totalQuestions = ResultFragmentArgs.fromBundle(it).totalQuestions
 
             // Display the score, percentage, and number of incorrect answers in TextViews
             binding.scoreTextView.text = getString(R.string.score, score)
             binding.percentageTextView.text = getString(R.string.percentage, percentage)
-            //binding.incorrectTextView.text = getString(R.string.incorrect_answers, incorrectAnswers)
+            binding.incorrectTextView.text = getString(R.string.incorrect_answers, totalQuestions)
 
             // Set click listener for the "Finish" button
             binding.btnFinish.setOnClickListener {
