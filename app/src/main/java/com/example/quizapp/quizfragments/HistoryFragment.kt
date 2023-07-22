@@ -112,7 +112,7 @@ class HistoryFragment : Fragment() {
                         val percentage = (result.toFloat() / totalQuestions.toFloat()) * 100
 
                         // Handle navigation to the ResultFragment here
-                        val action = PhysicsFragmentDirections.actionPhysicsFragmentToResultFragment(
+                        val action = HistoryFragmentDirections.actionHistoryFragmentToResultFragment(
                             score = score, percentage = percentage)
                         findNavController().navigate(action)
                     }
