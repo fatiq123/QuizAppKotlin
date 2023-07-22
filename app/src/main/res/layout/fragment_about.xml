@@ -93,14 +93,14 @@
                             android:layout_marginTop="8dp"
                             android:layout_marginBottom="8dp"
                             android:background="@drawable/text_background"
-                            android:drawableStart="@drawable/ic_phone"
                             android:drawablePadding="8dp"
                             android:fontFamily="sans-serif-light"
                             android:padding="8dp"
                             android:textAlignment="center"
                             android:textColor="#4caf50"
                             android:textSize="20sp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            app:drawableStartCompat="@drawable/ic_phone" />
 
                         <TextView
                             android:id="@+id/tvEmail"
@@ -110,14 +110,14 @@
                             android:layout_marginTop="16dp"
                             android:layout_marginBottom="16dp"
                             android:background="@drawable/text_background"
-                            android:drawableStart="@drawable/ic_email"
                             android:drawablePadding="8dp"
                             android:fontFamily="sans-serif-medium"
                             android:padding="8dp"
                             android:textAlignment="center"
                             android:textColor="#007bff"
                             android:textSize="20sp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            app:drawableStartCompat="@drawable/ic_email" />
                     </LinearLayout>
 
 

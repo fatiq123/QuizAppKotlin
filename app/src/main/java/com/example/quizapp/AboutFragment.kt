@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
+import androidx.navigation.fragment.findNavController
 import com.example.quizapp.databinding.FragmentAboutBinding
 
 class AboutFragment : Fragment() {
@@ -49,6 +50,13 @@ class AboutFragment : Fragment() {
             openLinkInBrowser("https://github.com/fatiq123")
         }
 
+
+
+        // navigate back to home fragment
+        binding.btnGoBackFromAbout.setOnClickListener {
+            val action = AboutFragmentDirections.actionAboutFragmentToHomeFragment()
+            findNavController().navigate(action)
+        }
 
         return binding.root
     }
