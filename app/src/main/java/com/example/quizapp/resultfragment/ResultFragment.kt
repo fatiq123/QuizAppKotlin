@@ -67,11 +67,14 @@ class ResultFragment : Fragment() {
 
 
             // After the quiz is finished, store the result in shared preferences
+            // we can only access getSharedPreference by context or requireContext() in fragments
+            // i have do this many times it is not very complex we just getting the score and percentage from this fragment and getting it in QUizResultsFragment
             val sharedPreferences = requireContext().getSharedPreferences("QuizResults", Context.MODE_PRIVATE)
             val editor = sharedPreferences.edit()
             editor.putInt("score", score)
             editor.putFloat("percentage", percentage)
-            editor.apply()
+            editor.apply() // puts the data asynchronously
+//                commit()  put the data synchronously and blocks the main thread and UI
 
 
 

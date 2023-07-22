@@ -31,27 +31,10 @@ class QuizResultsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        // Retrieve quiz results from shared preferences (Replace this with your logic)
-//        val quizResults = listOf(
-//            QuizResultItem("Quiz 1", 8, 80f),
-//            QuizResultItem("Quiz 2", 10, 100f),
-//            QuizResultItem("Quiz 3", 5, 50f)
-//        )
-
-//        // Display the quiz results in a RecyclerView using the QuizResultsAdapter
-//        resultsAdapter = QuizResultsAdapter(quizResults)
-//        binding.recyclerViewResults.layoutManager = LinearLayoutManager(requireContext())
-//        binding.recyclerViewResults.adapter = resultsAdapter
-
-
-
-
-
-
-
 
         // Retrieve quiz results from shared preferences
-        val sharedPreferences = requireContext().getSharedPreferences("QuizResults", Context.MODE_PRIVATE)
+        val sharedPreferences =
+            requireContext().getSharedPreferences("QuizResults", Context.MODE_PRIVATE)
         val score = sharedPreferences.getInt("score", 0)
         val percentage = sharedPreferences.getFloat("percentage", 0f)
 
