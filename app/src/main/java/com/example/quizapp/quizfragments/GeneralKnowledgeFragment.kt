@@ -4,7 +4,6 @@ import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,22 +15,20 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.quizapp.R
-import com.example.quizapp.databinding.FragmentComputerScienceBinding
-import com.example.quizapp.databinding.FragmentPhysicsBinding
+import com.example.quizapp.databinding.FragmentGeneralKnowledgeBinding
 import com.example.quizapp.model.Question
+import com.example.quizapp.model.QuestionsList
 import com.example.quizapp.viewmodel.QuizViewModel
 
-class ComputerScienceFragment : Fragment() {
+class GeneralKnowledgeFragment : Fragment() {
 
+    private lateinit var binding: FragmentGeneralKnowledgeBinding
 
-    private lateinit var binding: FragmentComputerScienceBinding
-
-    private lateinit var quizViewModel: QuizViewModel /*by viewModels()*/
     private lateinit var questionsList: List<Question>
-    private var currentQuestionIndex = 0
+    private lateinit var quizViewModel: QuizViewModel
     private var result = 0
+    private var currentQuestionIndex = 0
     private var incorrectAnswers = 0
-
 
 
     override fun onCreateView(
@@ -39,12 +36,9 @@ class ComputerScienceFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentComputerScienceBinding.inflate(inflater, container, false)
-
+        binding = FragmentGeneralKnowledgeBinding.inflate(inflater, container, false)
 
         return binding.root
-
-
     }
 
 
@@ -57,7 +51,7 @@ class ComputerScienceFragment : Fragment() {
 
 
         // Observe the LiveData for questions and update UI when data is available
-        quizViewModel.getComputerScienceQuestionsFromLiveData().observe(viewLifecycleOwner, Observer { questions ->
+        quizViewModel.getGeneralKnowledgeQuestionsFromLiveData().observe(viewLifecycleOwner, Observer { questions ->
             if (questions.isNotEmpty()) {
                 questionsList = questions
                 displayQuestion()
@@ -132,16 +126,16 @@ class ComputerScienceFragment : Fragment() {
                 ).show()
             }
         }
-        Log.i("Tag", "End observe")
+
+
+
 
     }
 
-
-    private fun displayQuestion() {     // ya function fragment khulta sar hi pehla question zaroor dekhaya ga aur dekhana bi chahiya
-        Log.i("Tag", "In display Question")
+    private fun displayQuestion() {
         if (currentQuestionIndex < questionsList.size) {
             binding.apply {
-                tvComputerScienceQuestion.text = "Question ${currentQuestionIndex + 1}: " + questionsList[currentQuestionIndex].question
+                tvGeneralKnowledgeQuestion.text = "Question ${currentQuestionIndex + 1}: " + questionsList[currentQuestionIndex].question
                 radio1.text = questionsList[currentQuestionIndex].option1
                 radio2.text = questionsList[currentQuestionIndex].option2
                 radio3.text = questionsList[currentQuestionIndex].option3
@@ -156,9 +150,6 @@ class ComputerScienceFragment : Fragment() {
                 }
             }
         }
-
-
     }
-
 
 }

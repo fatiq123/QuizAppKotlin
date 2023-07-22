@@ -78,7 +78,11 @@
         android:id="@+id/computerScienceFragment"
         android:name="com.example.quizapp.quizfragments.ComputerScienceFragment"
         android:label="fragment_computer_science"
-        tools:layout="@layout/fragment_computer_science" />
+        tools:layout="@layout/fragment_computer_science" >
+        <action
+            android:id="@+id/action_computerScienceFragment_to_resultFragment"
+            app:destination="@id/resultFragment" />
+    </fragment>
     <fragment
         android:id="@+id/historyFragment"
         android:name="com.example.quizapp.quizfragments.HistoryFragment"
@@ -86,9 +90,13 @@
         tools:layout="@layout/fragment_history" />
     <fragment
         android:id="@+id/biologyFragment"
-        android:name="com.example.quizapp.quizfragments.BiologyFragment"
+        android:name="com.example.quizapp.quizfragments.GeneralKnowledgeFragment"
         android:label="fragment_biology"
-        tools:layout="@layout/fragment_biology" />
+        tools:layout="@layout/fragment_general_knowledge" >
+        <action
+            android:id="@+id/action_biologyFragment_to_resultFragment"
+            app:destination="@id/resultFragment" />
+    </fragment>
     <fragment
         android:id="@+id/resultFragment"
         android:name="com.example.quizapp.resultfragment.ResultFragment"
