@@ -15,14 +15,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.example.quizapp.Constants
 import com.example.quizapp.R
 import com.example.quizapp.adapter.QuestionAdapter
 import com.example.quizapp.databinding.FragmentMathsQuizBinding
 import com.example.quizapp.model.Question
-import com.example.quizapp.model.QuizResult
 import com.example.quizapp.viewmodel.QuizViewModel
-import kotlinx.coroutines.DelicateCoroutinesApi
 
 class MathsQuizFragment : Fragment() {
 

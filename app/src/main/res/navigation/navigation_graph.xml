@@ -49,6 +49,9 @@
         <action
             android:id="@+id/action_homeFragment_to_aboutFragment"
             app:destination="@id/aboutFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_quizResultsFragment"
+            app:destination="@id/quizResultsFragment" />
     </fragment>
     <fragment
         android:id="@+id/mathsQuizFragment"
@@ -132,6 +135,15 @@
 
         <action
             android:id="@+id/action_aboutFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/quizResultsFragment"
+        android:name="com.example.quizapp.QuizResultsFragment"
+        android:label="fragment_quiz_results"
+        tools:layout="@layout/fragment_quiz_results" >
+        <action
+            android:id="@+id/action_quizResultsFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
 </navigation>

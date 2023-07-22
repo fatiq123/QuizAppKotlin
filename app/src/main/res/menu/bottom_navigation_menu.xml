@@ -9,8 +9,8 @@
 
     <item
         android:id="@+id/miQuiz"
-        android:icon="@drawable/ic_quiz"
-        android:title="Quiz" />
+        android:icon="@drawable/result"
+        android:title="Result" />
 
     <item
         android:id="@+id/miAbout"

@@ -1,5 +1,6 @@
 package com.example.quizapp.resultfragment
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -52,16 +53,30 @@ class ResultFragment : Fragment() {
 
 
 
-
-
-
-
             // Set click listener for the "Finish" button
             binding.btnFinish.setOnClickListener {
                 // Navigate back to the HomeFragment using the action ID
                 findNavController().navigate(R.id.action_resultFragment_to_homeFragment)
             }
+
+
+
+
+
+            //----------------------------Shared Preferences----------------------------------------//
+
+
+            // After the quiz is finished, store the result in shared preferences
+            val sharedPreferences = requireContext().getSharedPreferences("QuizResults", Context.MODE_PRIVATE)
+            val editor = sharedPreferences.edit()
+            editor.putInt("score", score)
+            editor.putFloat("percentage", percentage)
+            editor.apply()
+
+
+
         }
+
 
 
         return binding.root

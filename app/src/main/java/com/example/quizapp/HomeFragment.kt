@@ -6,14 +6,12 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.viewmodel.CreationExtras
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.quizapp.adapter.CategoryAdapter
 import com.example.quizapp.databinding.FragmentHomeBinding
-import com.example.quizapp.model.QuizResult
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
@@ -40,7 +38,8 @@ class HomeFragment : Fragment(), BottomNavigationView.OnNavigationItemSelectedLi
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         // Sample list of categories (replace with your actual categories)
-        val categories = listOf("Math", "Physics", "Computer Science", "History", "General Knowledge")
+        val categories =
+            listOf("Math", "Physics", "Computer Science", "History", "General Knowledge")
 
         // Set up the RecyclerView adapter with item click handling
         categoryAdapter = CategoryAdapter(categories) { selectedCategory ->
@@ -50,11 +49,8 @@ class HomeFragment : Fragment(), BottomNavigationView.OnNavigationItemSelectedLi
         recyclerView.adapter = categoryAdapter
 
 
-
         // Initialize NavController
         navController = findNavController()
-
-
 
 
         // Set the bottom navigation listener in the HomeFragment
@@ -111,11 +107,10 @@ class HomeFragment : Fragment(), BottomNavigationView.OnNavigationItemSelectedLi
     }
 
 
-
     // Function to calculate the user's score based on selected answers and correct answers
     private fun calculateUserScore(
         userSelectedAnswers: List<String>,
-        correctAnswers: List<String>
+        correctAnswers: List<String>,
     ): Int {
         var score = 0
 
@@ -143,18 +138,21 @@ class HomeFragment : Fragment(), BottomNavigationView.OnNavigationItemSelectedLi
                 // If the user clicks on "Home", do nothing since they are already in the HomeFragment
                 return true
             }
+
             R.id.miQuiz -> {
-                // If the user clicks on "Quiz", navigate to the QuizFragment
-//            val action = HomeFragmentDirections.actionHomeFragmentToQuizFragment()
-//            navController.navigate(action)
+                // If the user clicks on "Results", navigate to the QuizResultsFragment
+                val action = HomeFragmentDirections.actionHomeFragmentToQuizResultsFragment()
+                navController.navigate(action)
                 return true
             }
+
             R.id.miAbout -> {
                 // If the user clicks on "Profile", navigate to the AboutFragment
                 val action = HomeFragmentDirections.actionHomeFragmentToAboutFragment()
                 navController.navigate(action)
                 return true
             }
+
             else -> return false
         }
     }
@@ -165,7 +163,6 @@ class HomeFragment : Fragment(), BottomNavigationView.OnNavigationItemSelectedLi
 //        val action = HomeFragmentDirections.actionHomeFragmentToResultFragment()
 //        navController.navigate(action)
 //    }
-
 
 
 }
