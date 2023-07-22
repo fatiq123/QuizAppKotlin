@@ -34,5 +34,38 @@ class QuizRepository {
         }
     }
 
+    suspend fun getComputerScienceQuestionsFromApi(): List<Question> {
+        return withContext(Dispatchers.IO) {
+            val response = questionsAPI.getComputerScienceQuestions()
+            if (response.isSuccessful) {
+                response.body() ?: emptyList()
+            } else {
+                emptyList()
+            }
+        }
+    }
+
+
+    suspend fun getHistoryQuestionsFromAPi(): List<Question> {
+        return withContext(Dispatchers.IO) {
+            val response = questionsAPI.getHistoryQuestions()
+            if (response.isSuccessful) {
+                response.body() ?: emptyList()
+            } else {
+                emptyList()
+            }
+        }
+    }
+
+    suspend fun getGeneralKnowledgeQuestionsFromAPi(): List<Question> {
+        return withContext(Dispatchers.IO) {
+            val response = questionsAPI.getGeneralKnowledgeQuestions()
+            if (response.isSuccessful) {
+                response.body() ?: emptyList()
+            } else {
+                emptyList()
+            }
+        }
+    }
 
 }

@@ -10,13 +10,19 @@ import kotlinx.coroutines.launch
 
 class QuizViewModel : ViewModel() {
 
-    private val repository: QuizRepository = QuizRepository()
+    private val repository: QuizRepository = QuizRepository()   // always we have to make a object of repository to use it in view model
     private val questionsLiveData: MutableLiveData<List<Question>> = MutableLiveData()
     private val questionsPhysicsLiveData: MutableLiveData<List<Question>> = MutableLiveData()
+    private val questionsComputerScienceLiveData: MutableLiveData<List<Question>> = MutableLiveData()
+    private val questionsHistoryLiveData: MutableLiveData<List<Question>> = MutableLiveData()
+    private val questionsGeneralKnowledgeLiveData: MutableLiveData<List<Question>> = MutableLiveData()
 
-    init {
+    init {      // this block will always runs first when viewModel class is called
         fetchQuestions()
         fetchPhysicsQuestions()
+        fetchComputerScienceQuestions()
+        fetchHistoryQuestions()
+        fetchGeneralKnowledgeQuestions()
     }
 
     private fun fetchQuestions() {
@@ -31,6 +37,27 @@ class QuizViewModel : ViewModel() {
         viewModelScope.launch {
             val questions = repository.getPhysicsQuestionsFromAPI()
             questionsPhysicsLiveData.postValue(questions)
+        }
+    }
+
+    private fun fetchComputerScienceQuestions() {
+        viewModelScope.launch {
+            val questions = repository.getComputerScienceQuestionsFromApi()
+            questionsComputerScienceLiveData.postValue(questions)
+        }
+    }
+
+    private fun fetchHistoryQuestions() {
+        viewModelScope.launch {
+            val questions = repository.getHistoryQuestionsFromAPi()
+            questionsHistoryLiveData.postValue(questions)
+        }
+    }
+
+    private fun fetchGeneralKnowledgeQuestions() {
+        viewModelScope.launch {
+            val questions = repository.getGeneralKnowledgeQuestionsFromAPi()
+            questionsGeneralKnowledgeLiveData.postValue(questions)
         }
     }
 

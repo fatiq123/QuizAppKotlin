@@ -12,4 +12,13 @@ interface QuestionsApi {
     @GET("questionsphysicsapi.php")
     suspend fun getPhysicsQuestions(): Response<QuestionsList>
 
+    @GET("uestioncomputerscienceapi.php")
+    suspend fun getComputerScienceQuestions(): Response<QuestionsList>
+
+    @GET("questionhistoryapi.php")
+    suspend fun getHistoryQuestions(): Response<QuestionsList>
+
+    @GET("questiongeneralknowledge.php")
+    suspend fun getGeneralKnowledgeQuestions(): Response<QuestionsList>
+
 }
