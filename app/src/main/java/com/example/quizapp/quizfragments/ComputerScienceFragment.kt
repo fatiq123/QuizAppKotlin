@@ -139,7 +139,7 @@ class ComputerScienceFragment : Fragment() {
         Log.i("Tag", "In display Question")
         if (currentQuestionIndex < questionsList.size) {
             binding.apply {
-                tvPhysicsQuestion.text = "Question ${currentQuestionIndex + 1}: " + questionsList[currentQuestionIndex].question
+                tvComputerScienceQuestion.text = "Question ${currentQuestionIndex + 1}: " + questionsList[currentQuestionIndex].question
                 radio1.text = questionsList[currentQuestionIndex].option1
                 radio2.text = questionsList[currentQuestionIndex].option2
                 radio3.text = questionsList[currentQuestionIndex].option3

@@ -37,7 +37,7 @@
                     app:cardPreventCornerOverlap="true">
 
                     <TextView
-                        android:id="@+id/tvPhysicsQuestion"
+                        android:id="@+id/tvComputerScienceQuestion"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Ready for Challenge ?"
