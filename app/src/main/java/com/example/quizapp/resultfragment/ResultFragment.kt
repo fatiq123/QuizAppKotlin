@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.quizapp.R
-import com.example.quizapp.ResultFragmentArgs
 import com.example.quizapp.databinding.FragmentResultBinding
 
 class ResultFragment : Fragment() {
@@ -40,7 +39,32 @@ class ResultFragment : Fragment() {
             }
         }
 
+
         return binding.root
     }
 
 }
+
+
+
+
+
+
+
+
+//------------------------------we can also make a variable for args and use it as below----------------------------
+// Get the arguments passed from the PhysicsFragment
+//val args = ResultFragmentArgs.fromBundle(requireArguments())      // this line is very important
+//
+//// Display the score and percentage in TextViews
+//binding.scoreTextView.text = getString(R.string.score, args.score)
+//binding.percentageTextView.text = getString(R.string.percentage, args.percentage)
+//
+//// Display the number of incorrect answers
+//binding.incorrectTextView.text = getString(R.string.incorrect_answers, args.incorrectAnswers)
+//
+//// Set click listener for the "Finish" button
+//binding.btnFinish.setOnClickListener {
+//    // Navigate back to the HomeFragment
+//    findNavController().navigateUp()
+//}

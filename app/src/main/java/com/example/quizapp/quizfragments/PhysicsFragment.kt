@@ -1,6 +1,9 @@
 package com.example.quizapp.quizfragments
 
+import android.graphics.Color
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +14,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.quizapp.R
 import com.example.quizapp.databinding.FragmentPhysicsBinding
 import com.example.quizapp.model.Question
@@ -89,15 +93,15 @@ class PhysicsFragment : Fragment() {
 
 
                         // After a brief delay, reset the background color to the default color
-//                        Handler(Looper.getMainLooper()).postDelayed({
-//                            binding.radioGroup.clearCheck()
-//                            radioButton.setBackgroundResource(android.R.drawable.btn_default)
-//                            displayQuestion()
-//                        }, 1000)
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            binding.radioGroup.clearCheck()
+                            radioButton.setBackgroundResource(android.R.drawable.btn_default)
+                            displayQuestion()
+                        }, 1000)
 
 //                        // Display the next question
                         currentQuestionIndex++
-                        displayQuestion()
+//                        displayQuestion()
 
                         // Checking if it is the last question
                         if (currentQuestionIndex == it.size - 1) {
@@ -112,10 +116,10 @@ class PhysicsFragment : Fragment() {
                         val totalQuestions = questionsList.size
                         val percentage = (result.toFloat() / totalQuestions.toFloat()) * 100
 
-//                        // Handle navigation to the ResultFragment here
-//                        val action = MathsQuizFragmentDirections.actionMathsQuizFragmentToResultFragment3(
-//                            score = score, percentage = percentage)
-//                        findNavController().navigate(action)
+                        // Handle navigation to the ResultFragment here
+                        val action = PhysicsFragmentDirections.actionPhysicsFragmentToResultFragment(
+                            score = score, percentage = percentage)
+                        findNavController().navigate(action)
                     }
                 }
             } else {
@@ -144,10 +148,10 @@ class PhysicsFragment : Fragment() {
 
                 // Existing code to display the next question...
                 // Reset background color of all radio buttons to default
-//                for (i in 0 until binding.radioGroup.childCount) {
-//                    val radioButton = binding.radioGroup.getChildAt(i) as RadioButton
-//                    radioButton.setBackgroundColor(Color.TRANSPARENT)
-//                }
+                for (i in 0 until binding.radioGroup.childCount) {
+                    val radioButton = binding.radioGroup.getChildAt(i) as RadioButton
+                    radioButton.setBackgroundColor(Color.TRANSPARENT)
+                }
             }
         }
 

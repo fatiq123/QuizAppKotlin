@@ -10,6 +10,6 @@ interface QuestionsApi {
     suspend fun getQuestions(): Response<QuestionsList>
 
     @GET("questionsphysicsapi.php")
-    suspend fun getPhysicsQuestions(): Response<QuestionPhysicsList>
+    suspend fun getPhysicsQuestions(): Response<QuestionsList>
 
 }

@@ -69,7 +69,11 @@
         android:id="@+id/physicsFragment"
         android:name="com.example.quizapp.quizfragments.PhysicsFragment"
         android:label="fragment_physics"
-        tools:layout="@layout/fragment_physics" />
+        tools:layout="@layout/fragment_physics" >
+        <action
+            android:id="@+id/action_physicsFragment_to_resultFragment"
+            app:destination="@id/resultFragment" />
+    </fragment>
     <fragment
         android:id="@+id/computerScienceFragment"
         android:name="com.example.quizapp.quizfragments.ComputerScienceFragment"
