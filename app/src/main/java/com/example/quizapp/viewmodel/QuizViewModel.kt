@@ -62,6 +62,11 @@ class QuizViewModel : ViewModel() {
     }
 
 
+
+
+
+    // when we work on different quiz fragments then we will use below functions in our fragments
+    // these functions are really very much important
     fun getQuestionsFromLiveData(): LiveData<List<Question>> {
         return questionsLiveData
     }
@@ -69,5 +74,17 @@ class QuizViewModel : ViewModel() {
 
     fun getPhysicsQuestionsFromLiveData(): LiveData<List<Question>> {
         return questionsPhysicsLiveData
+    }
+
+    fun getComputerScienceQuestionsFromLiveData(): LiveData<List<Question>> {
+        return questionsComputerScienceLiveData
+    }
+
+    fun getHistoryQuestionsFromLiveData(): LiveData<List<Question>> {
+        return questionsHistoryLiveData
+    }
+
+    fun getGeneralKnowledgeQuestionsFromLiveData(): LiveData<List<Question>> {
+        return questionsGeneralKnowledgeLiveData
     }
 }
