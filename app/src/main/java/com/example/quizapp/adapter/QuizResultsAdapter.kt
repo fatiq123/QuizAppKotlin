@@ -4,6 +4,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.quizapp.R
 import com.example.quizapp.model.QuizResultItem
@@ -17,6 +19,10 @@ class QuizResultsAdapter(
         val tvQuizTitle: TextView = itemView.findViewById(R.id.tvQuizTitle)
         val tvScore: TextView = itemView.findViewById(R.id.tvScore)
         val tvPercentage: TextView = itemView.findViewById(R.id.tvPercentage)
+        // to change the color of card View
+//        val cardView: CardView = itemView.findViewById(R.id.cardView)
+
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -34,5 +40,10 @@ class QuizResultsAdapter(
         holder.tvQuizTitle.text = resultItem.quizTitle
         holder.tvScore.text = "Score: ${resultItem.score}"
         holder.tvPercentage.text = "Percentage: ${resultItem.percentage}%"
+
+//        // Set the CardView background color dynamically based on the colorResId
+//        holder.cardView.setCardBackgroundColor(
+//            ContextCompat.getColor(holder.itemView.context, resultItem.colorResId)
+//        )
     }
 }
