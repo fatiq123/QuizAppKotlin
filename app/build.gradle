@@ -85,4 +85,7 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
 
 
+//    required dependency for the circular image view
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+
 }
