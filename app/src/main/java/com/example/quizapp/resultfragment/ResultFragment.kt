@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.quizapp.R
 import com.example.quizapp.databinding.FragmentResultBinding
+import com.example.quizapp.model.ResultMessage
 
 class ResultFragment : Fragment() {
 
@@ -32,6 +33,29 @@ class ResultFragment : Fragment() {
             binding.percentageTextView.text = getString(R.string.percentage, percentage)
             //binding.incorrectTextView.text = getString(R.string.incorrect_answers, totalQuestions)
 
+
+
+
+
+            // Get the result message and image based on the user's score
+            val resultMessage = getResultMessage(score)
+
+            // Display the result message
+            binding.resultMessageTextView.text = resultMessage.message
+
+            // Display the result image
+            binding.resultImageView.setImageResource(resultMessage.imageResource)
+
+
+
+
+
+
+
+
+
+
+
             // Set click listener for the "Finish" button
             binding.btnFinish.setOnClickListener {
                 // Navigate back to the HomeFragment using the action ID
@@ -42,6 +66,17 @@ class ResultFragment : Fragment() {
 
         return binding.root
     }
+
+
+    private fun getResultMessage(score: Int): ResultMessage {
+        return when (score) {
+            in 0..2 -> ResultMessage("Your score is too low.", R.drawable.quiz_result)
+            in 3..7 -> ResultMessage("Good job!", R.drawable.quiz_result)
+            else -> ResultMessage("Excellent!", R.drawable.quiz_result)
+        }
+    }
+
+
 
 }
 
