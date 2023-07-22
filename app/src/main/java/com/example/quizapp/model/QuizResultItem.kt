@@ -7,5 +7,4 @@ data class QuizResultItem(
     val quizTitle: String,
     val score: Int,
     val percentage: Float,
-    val colorResId: Int
 )

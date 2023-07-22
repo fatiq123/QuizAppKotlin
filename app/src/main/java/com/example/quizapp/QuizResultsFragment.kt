@@ -18,6 +18,7 @@ class QuizResultsFragment : Fragment() {
     private lateinit var binding: FragmentQuizResultsBinding
 
     private lateinit var resultsAdapter: QuizResultsAdapter
+//    private val quizResultsList = mutableListOf<QuizResultItem>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,31 +35,67 @@ class QuizResultsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
+
         // Retrieve quiz results from shared preferences
         val sharedPreferences =
             requireContext().getSharedPreferences("QuizResults", Context.MODE_PRIVATE)
         val score = sharedPreferences.getInt("score", 0)
         val percentage = sharedPreferences.getFloat("percentage", 0f)
 
+
+
         // Display the quiz results in a RecyclerView using the QuizResultsAdapter
         val resultsList = mutableListOf<QuizResultItem>()
-        resultsList.add(QuizResultItem("Quiz 1", score, percentage, getRandomColor()))
+        resultsList.add(QuizResultItem("Quiz", score, percentage))
         // Add more items as needed for other quiz results
 
 
-        resultsAdapter = QuizResultsAdapter(resultsList)
+
+        // Initialize the resultsAdapter with an empty list
+        resultsAdapter = QuizResultsAdapter(quizResults = resultsList)
+
+        // Set the layout manager and adapter for the RecyclerView
         binding.recyclerViewResults.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerViewResults.adapter = resultsAdapter
+
+
+
+
+
+        // Get the quiz title argument from the bundle
+//        val quizTitle = arguments?.getString("quizTitle") ?: "Quiz"
+
+
+
+//        updateQuizResults(quizTitle = quizTitle)
 
     }
 
 
 
+//
+//    private fun updateQuizResults(quizTitle: String) {
+//        // Retrieve quiz results from shared preferences
+//        val sharedPreferences = requireContext().getSharedPreferences("QuizResults", Context.MODE_PRIVATE)
+//        val score = sharedPreferences.getInt("score", 0)
+//        val percentage = sharedPreferences.getFloat("percentage", 0f)
+//
+//        // Create a new QuizResultItem with the fetched data and dynamic quiz title
+//        val newResultItem = QuizResultItem(quizTitle, score, percentage, getRandomColor())
+//
+//        // Add the new result to the top of the list
+//        quizResultsList.add(0, newResultItem)
+//
+//        // Notify the adapter that the data has changed
+//        resultsAdapter.notifyDataSetChanged()
+//    }
 
 
 
 
 
+
+    // what a beautiful function read it
     private fun getRandomColor(): Int {
         val colors = arrayOf(
             Color.parseColor("#FFC107"), // Amber

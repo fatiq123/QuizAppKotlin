@@ -1,42 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?><!-- item_quiz_result.xml -->
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <!-- item_quiz_result_card.xml -->
-    <androidx.cardview.widget.CardView
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp">
+        android:layout_height="match_parent">
 
-        <LinearLayout
+        <!-- Quiz Result CardView -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="16dp">
+            android:layout_height="300dp"
+            android:layout_margin="16dp"
+            android:elevation="4dp"
+            app:cardCornerRadius="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/tvQuizTitle"
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:orientation="vertical"
+                android:padding="16dp">
 
-            <TextView
-                android:id="@+id/tvScore"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="16sp" />
+                <!-- Previous Quiz Result title -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="16dp"
+                    android:fontFamily="@font/lobster"
+                    android:text="Previous Quiz Result"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/tvPercentage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:textSize="16sp" />
+                <!-- Quiz Title -->
+                <TextView
+                    android:id="@+id/tvQuizTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/text_background"
+                    android:fontFamily="@font/lobster"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:visibility="invisible" />
 
-        </LinearLayout>
+                <!-- Score -->
+                <TextView
+                    android:id="@+id/tvScore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/text_background"
+                    android:fontFamily="@font/lobster"
+                    android:textColor="#4caf50"
+                    android:textSize="26sp" />
 
-    </androidx.cardview.widget.CardView>
+                <!-- Percentage -->
+                <TextView
+                    android:id="@+id/tvPercentage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/text_background"
+                    android:fontFamily="@font/lobster"
+                    android:textColor="#007bff"
+                    android:textSize="26sp" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!--        <Button-->
+        <!--            android:id="@+id/btnGoBackFromQuizResultFragment"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginBottom="28dp"-->
+        <!--            android:text="Back"-->
+        <!--            android:textSize="20sp"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintHorizontal_bias="0.498"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/cardView2" />-->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

@@ -19,9 +19,6 @@ class QuizResultsAdapter(
         val tvQuizTitle: TextView = itemView.findViewById(R.id.tvQuizTitle)
         val tvScore: TextView = itemView.findViewById(R.id.tvScore)
         val tvPercentage: TextView = itemView.findViewById(R.id.tvPercentage)
-        // to change the color of card View
-//        val cardView: CardView = itemView.findViewById(R.id.cardView)
-
 
     }
 
@@ -41,9 +38,8 @@ class QuizResultsAdapter(
         holder.tvScore.text = "Score: ${resultItem.score}"
         holder.tvPercentage.text = "Percentage: ${resultItem.percentage}%"
 
-//        // Set the CardView background color dynamically based on the colorResId
-//        holder.cardView.setCardBackgroundColor(
-//            ContextCompat.getColor(holder.itemView.context, resultItem.colorResId)
-//        )
     }
+
+
+
 }
