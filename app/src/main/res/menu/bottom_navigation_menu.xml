@@ -13,8 +13,10 @@
         android:title="Quiz" />
 
     <item
-        android:id="@+id/miProfile"
-        android:icon="@drawable/ic_person"
-        android:title="Person" />
+        android:id="@+id/miAbout"
+        android:icon="@drawable/about"
+        android:title="About" />
+
+
 
 </menu>

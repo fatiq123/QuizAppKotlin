@@ -3,18 +3,24 @@ package com.example.quizapp
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.viewmodel.CreationExtras
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.quizapp.adapter.CategoryAdapter
+import com.example.quizapp.databinding.FragmentHomeBinding
 import com.example.quizapp.model.QuizResult
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), BottomNavigationView.OnNavigationItemSelectedListener {
 
+
+    private lateinit var binding: FragmentHomeBinding
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var categoryAdapter: CategoryAdapter
@@ -25,11 +31,12 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
 
-        val view = inflater.inflate(R.layout.fragment_home, container, false)
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
+        val view = binding.root
 
 
         // Initialize RecyclerView
-        recyclerView = view.findViewById(R.id.recyclerView)
+        recyclerView = binding.recyclerView
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         // Sample list of categories (replace with your actual categories)
@@ -43,9 +50,15 @@ class HomeFragment : Fragment() {
         recyclerView.adapter = categoryAdapter
 
 
-        // Initialize NavController
-        navController = findNavController() // this is very important
 
+        // Initialize NavController
+        navController = findNavController()
+
+
+
+
+        // Set the bottom navigation listener in the HomeFragment
+        binding.bottomNavigationView.setOnNavigationItemSelectedListener(this)
 
         return view
     }
@@ -88,28 +101,14 @@ class HomeFragment : Fragment() {
         }
 
 
-        // Collect user's selected answers and correct answers from the quiz fragment (replace this with your actual implementation)
-        //val userSelectedAnswers = listOf("Option 1", "Option 3", "Option 2", "Option 4")
-        //val correctAnswers = listOf("Correct", "Correct", "Correct", "Incorrect")
-
-        // Calculate the user's score and percentage
-        //val userScore = calculateUserScore(userSelectedAnswers, correctAnswers)
-        //val userPercentage = calculateUserPercentage(userScore, correctAnswers.size)
-
-        // Create a QuizResult instance with the score, percentage, selected answers, and correct answers
-//        val quizResult = QuizResult(
-//            score = userScore,
-//            percentage = userPercentage,
-//            selectedAnswers = userSelectedAnswers,
-//            correctAnswers = correctAnswers
-//        )
-
-        // Navigate to the ResultFragment and pass the QuizResult as an argument
-        //navigateToResultFragment(quizResult = quizResult)
-
-
     }
 
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        // Set the bottom navigation listener in the HomeFragment
+        binding.bottomNavigationView.setOnNavigationItemSelectedListener(this)
+    }
 
 
 
@@ -137,7 +136,28 @@ class HomeFragment : Fragment() {
         return (userScore.toFloat() / totalQuestions.toFloat()) * 100
     }
 
-
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        // Handle item selection based on item ID
+        when (item.itemId) {
+            R.id.miHome -> {
+                // If the user clicks on "Home", do nothing since they are already in the HomeFragment
+                return true
+            }
+            R.id.miQuiz -> {
+                // If the user clicks on "Quiz", navigate to the QuizFragment
+//            val action = HomeFragmentDirections.actionHomeFragmentToQuizFragment()
+//            navController.navigate(action)
+                return true
+            }
+            R.id.miAbout -> {
+                // If the user clicks on "Profile", navigate to the AboutFragment
+                val action = HomeFragmentDirections.actionHomeFragmentToAboutFragment()
+                navController.navigate(action)
+                return true
+            }
+            else -> return false
+        }
+    }
 
 
     // Function to navigate to the ResultFragment and pass the QuizResult as an argument
@@ -145,5 +165,7 @@ class HomeFragment : Fragment() {
 //        val action = HomeFragmentDirections.actionHomeFragmentToResultFragment()
 //        navController.navigate(action)
 //    }
+
+
 
 }

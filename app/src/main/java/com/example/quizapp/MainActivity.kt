@@ -2,6 +2,7 @@ package com.example.quizapp
 
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -10,11 +11,15 @@ import androidx.appcompat.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
+import com.example.quizapp.databinding.FragmentHomeBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var homeBinding: FragmentHomeBinding
 
     private lateinit var navController: NavController
     private lateinit var customToolbar: Toolbar
@@ -53,6 +58,9 @@ class MainActivity : AppCompatActivity() {
 //        if (actionBar != null) {
 //            actionBar.setDisplayHomeAsUpEnabled(true)
 //        }
+
+
+
     }
 
 
@@ -79,4 +87,7 @@ class MainActivity : AppCompatActivity() {
 
         return true
     }
+
+
+
 }
