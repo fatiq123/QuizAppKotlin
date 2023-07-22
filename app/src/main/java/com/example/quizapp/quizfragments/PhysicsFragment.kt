@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,6 +21,7 @@ import com.example.quizapp.adapter.QuestionAdapter
 import com.example.quizapp.databinding.FragmentMathsQuizBinding
 import com.example.quizapp.databinding.FragmentPhysicsBinding
 import com.example.quizapp.model.Question
+import com.example.quizapp.model.QuestionPhysics
 import com.example.quizapp.viewmodel.QuizViewModel
 
 class PhysicsFragment : Fragment() {
@@ -27,7 +29,7 @@ class PhysicsFragment : Fragment() {
     private lateinit var binding: FragmentPhysicsBinding
 
     private lateinit var quizViewModel: QuizViewModel /*by viewModels()*/
-    private lateinit var questionsList: List<Question>
+    private lateinit var questionsList: List<QuestionPhysics>
     private var currentQuestionIndex = 0
     private var result = 0
     private var incorrectAnswers = 0
@@ -54,7 +56,7 @@ class PhysicsFragment : Fragment() {
 
         // Initialize the ViewModel
         quizViewModel = ViewModelProvider(this)[QuizViewModel::class.java]
-
+        Log.i("Tag", "Before observe")
         // Observe the LiveData for questions and update UI when data is available
         quizViewModel.getPhysicsQuestionsFromLiveData().observe(viewLifecycleOwner, Observer { questions ->
             if (questions.isNotEmpty()) {
@@ -62,7 +64,7 @@ class PhysicsFragment : Fragment() {
                 displayQuestion()
             }
         })
-
+        Log.i("Tag", "After observe")
         // Set a click listener on the "Next" button
         binding.btnNext.setOnClickListener {
             val selectedOption = binding.radioGroup.checkedRadioButtonId
@@ -132,12 +134,13 @@ class PhysicsFragment : Fragment() {
                 ).show()
             }
         }
-
+        Log.i("Tag", "End observe")
 
     }
 
 
-    private fun displayQuestion() {
+    private fun displayQuestion() {     // ya function fragment khulta sar hi pehla question zaroor dekhaya ga aur dekhana bi chahiya
+        Log.i("Tag", "In display Question")
         if (currentQuestionIndex < questionsList.size) {
             binding.apply {
                 tvPhysicsQuestion.text = "Question ${currentQuestionIndex + 1}: " + questionsList[currentQuestionIndex].question

@@ -1,16 +1,14 @@
-package com.example.quizapp
+package com.example.quizapp.resultfragment
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
+import com.example.quizapp.R
+import com.example.quizapp.ResultFragmentArgs
 import com.example.quizapp.databinding.FragmentResultBinding
-import com.example.quizapp.model.QuizResult
-import com.example.quizapp.viewmodel.QuizViewModel
 
 class ResultFragment : Fragment() {
 

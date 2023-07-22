@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.quizapp.model.Question
+import com.example.quizapp.model.QuestionPhysics
 import com.example.quizapp.model.QuestionsList
 import com.example.quizapp.retrofit.QuestionsApi
 import com.example.quizapp.retrofit.RetrofitInstance
@@ -30,7 +31,7 @@ class QuizRepository {
         }
     }
 
-    suspend fun getPhysicsQuestionsFromAPI(): List<Question> {
+    suspend fun getPhysicsQuestionsFromAPI(): List<QuestionPhysics> {
         return withContext(Dispatchers.IO) {
             val response = questionsAPI.getPhysicsQuestions()
             if (response.isSuccessful) {

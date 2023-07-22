@@ -87,7 +87,7 @@
         tools:layout="@layout/fragment_biology" />
     <fragment
         android:id="@+id/resultFragment"
-        android:name="com.example.quizapp.ResultFragment"
+        android:name="com.example.quizapp.resultfragment.ResultFragment"
         android:label="fragment_result"
         tools:layout="@layout/fragment_result" >
 
