@@ -1,9 +1,6 @@
 package com.example.quizapp.quizfragments
 
-import android.graphics.Color
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -14,14 +11,9 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.RecyclerView
 import com.example.quizapp.R
-import com.example.quizapp.adapter.QuestionAdapter
-import com.example.quizapp.databinding.FragmentMathsQuizBinding
 import com.example.quizapp.databinding.FragmentPhysicsBinding
 import com.example.quizapp.model.Question
-import com.example.quizapp.model.QuestionPhysics
 import com.example.quizapp.viewmodel.QuizViewModel
 
 class PhysicsFragment : Fragment() {
@@ -29,7 +21,7 @@ class PhysicsFragment : Fragment() {
     private lateinit var binding: FragmentPhysicsBinding
 
     private lateinit var quizViewModel: QuizViewModel /*by viewModels()*/
-    private lateinit var questionsList: List<QuestionPhysics>
+    private lateinit var questionsList: List<Question>
     private var currentQuestionIndex = 0
     private var result = 0
     private var incorrectAnswers = 0

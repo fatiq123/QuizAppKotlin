@@ -5,8 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.quizapp.model.Question
-import com.example.quizapp.model.QuestionPhysics
-import com.example.quizapp.model.QuestionsList
 import com.example.quizapp.repository.QuizRepository
 import kotlinx.coroutines.launch
 
@@ -14,7 +12,7 @@ class QuizViewModel : ViewModel() {
 
     private val repository: QuizRepository = QuizRepository()
     private val questionsLiveData: MutableLiveData<List<Question>> = MutableLiveData()
-    private val questionsPhysicsLiveData: MutableLiveData<List<QuestionPhysics>> = MutableLiveData()
+    private val questionsPhysicsLiveData: MutableLiveData<List<Question>> = MutableLiveData()
 
     init {
         fetchQuestions()
@@ -42,7 +40,7 @@ class QuizViewModel : ViewModel() {
     }
 
 
-    fun getPhysicsQuestionsFromLiveData(): LiveData<List<QuestionPhysics>> {
+    fun getPhysicsQuestionsFromLiveData(): LiveData<List<Question>> {
         return questionsPhysicsLiveData
     }
 }
