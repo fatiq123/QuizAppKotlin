@@ -87,4 +87,5 @@ class QuizViewModel : ViewModel() {
     fun getGeneralKnowledgeQuestionsFromLiveData(): LiveData<List<Question>> {
         return questionsGeneralKnowledgeLiveData
     }
+
 }
