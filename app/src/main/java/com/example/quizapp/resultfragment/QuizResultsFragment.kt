@@ -1,4 +1,4 @@
-package com.example.quizapp
+package com.example.quizapp.resultfragment
 
 import android.content.Context
 import android.graphics.Color

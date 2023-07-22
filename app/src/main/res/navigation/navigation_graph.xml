@@ -139,7 +139,7 @@
     </fragment>
     <fragment
         android:id="@+id/quizResultsFragment"
-        android:name="com.example.quizapp.QuizResultsFragment"
+        android:name="com.example.quizapp.resultfragment.QuizResultsFragment"
         android:label="fragment_quiz_results"
         tools:layout="@layout/fragment_quiz_results" >
         <action
