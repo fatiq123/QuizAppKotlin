@@ -55,7 +55,7 @@ class ComputerScienceFragment : Fragment() {
         // Initialize the ViewModel
         quizViewModel = ViewModelProvider(this)[QuizViewModel::class.java]
         // Observe the LiveData for questions and update UI when data is available
-        quizViewModel.getPhysicsQuestionsFromLiveData().observe(viewLifecycleOwner, Observer { questions ->
+        quizViewModel.getComputerScienceQuestionsFromLiveData().observe(viewLifecycleOwner, Observer { questions ->
             if (questions.isNotEmpty()) {
                 questionsList = questions
                 displayQuestion()

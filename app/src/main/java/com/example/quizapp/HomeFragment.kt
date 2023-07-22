@@ -33,7 +33,7 @@ class HomeFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         // Sample list of categories (replace with your actual categories)
-        val categories = listOf("Math", "Physics", "Computer Science", "History", "Biology")
+        val categories = listOf("Math", "Physics", "Computer Science", "History", "General Knowledge")
 
         // Set up the RecyclerView adapter with item click handling
         categoryAdapter = CategoryAdapter(categories) { selectedCategory ->
@@ -80,7 +80,7 @@ class HomeFragment : Fragment() {
                 navController.navigate(action)
             }
 
-            "Biology" -> {
+            "General Knowledge" -> {
                 val action = HomeFragmentDirections.actionHomeFragmentToBiologyFragment()
                 navController.navigate(action)
             }
