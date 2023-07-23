@@ -62,15 +62,27 @@ class SignupFragment : Fragment() {
 
     private fun createNewUser(email: String, password: String, userName: String) {
 
-        auth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener(requireActivity()) { task ->
-                if (task.isSuccessful) {
-                    // Sign-up successful, navigate to the next screen or perform other actions
-                    Toast.makeText(
-                        requireContext(),
-                        "Sign up successful!",
-                        Toast.LENGTH_SHORT
-                    ).show()
+        try {
+
+            if (email.isEmpty() || password.isEmpty() || userName.isEmpty()) {
+                Toast.makeText(
+                    requireContext(),
+                    "Email and password cannot be empty.",
+                    Toast.LENGTH_SHORT
+                ).show()
+
+                return
+            }
+            auth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(requireActivity()) { task ->
+                    if (task.isSuccessful) {
+                        // Sign-up successful, navigate to the next screen or perform other actions
+                        Toast.makeText(
+                            requireContext(),
+                            "Sign up successful!",
+                            Toast.LENGTH_SHORT
+                        ).show()
+
 
                     // Save user details to Firestore
                     val currentUser = auth.currentUser
@@ -105,15 +117,27 @@ class SignupFragment : Fragment() {
                             Toast.LENGTH_SHORT
                         ).show()
                     }
-                } else {
-                    // Sign-up failed, display an error message
-                    Toast.makeText(
-                        requireContext(),
-                        "Sign up failed. Please try again later.",
-                        Toast.LENGTH_SHORT
-                    ).show()
+//
+//                        // Navigate to the next screen, for example, the HomeFragment
+//                        findNavController().navigate(R.id.action_signupFragment_to_homeFragment)
+                    } else {
+                        // Sign-up failed, display an error message
+                        Toast.makeText(
+                            requireContext(),
+                            "Sign up failed. Please try again later.",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
-            }
+
+        } catch (e: IllegalArgumentException) {
+            // Handle the IllegalArgumentException here, e.g., display an error toast
+            Toast.makeText(
+                requireContext(),
+                "IllegalArgumentException: ${e.message}",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
 
     }
 
@@ -121,7 +145,6 @@ class SignupFragment : Fragment() {
     private fun updateUI(user: FirebaseUser?) {
 
     }
-
 
 
     override fun onStart() {
