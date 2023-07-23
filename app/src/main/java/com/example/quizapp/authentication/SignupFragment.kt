@@ -56,13 +56,13 @@ class SignupFragment : Fragment() {
 
             val email = binding.emailEditText.text.toString()
             val password = binding.passwordEditText.text.toString()
-            val username = binding.userNameEditText.text.toString()
-            createNewUser(email = email, password = password, userName = username)
+            val retypedPassword = binding.retypePasswordEditText.text.toString()
+            createNewUser(email = email, password = password, retypedPassword = retypedPassword)
         }
 
     }
 
-    private fun createNewUser(email: String, password: String, userName: String) {
+    private fun createNewUser(email: String, password: String, retypedPassword: String) {
 
 //        try {
 //
@@ -150,75 +150,136 @@ class SignupFragment : Fragment() {
 //        }
 
 
-        try {
-
-            if (email.isEmpty() || password.isEmpty() || userName.isEmpty()) {
-                Toast.makeText(
-                    requireContext(),
-                    "email, password and username cannot be empty",
-                    Toast.LENGTH_SHORT
-                ).show()
-
-                return
-            }
 
 
-            // Check if the email is already registered
-            FirebaseFirestore.getInstance().collection("users")
-                .whereEqualTo("email", email)
-                .get()
-                .addOnSuccessListener { querySnapshot ->
-                    if (!querySnapshot.isEmpty) {
-                        // Email is already registered, show an error message to the user
-                        Toast.makeText(
-                            requireContext(),
-                            "The email address is already in use by another account.",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    } else {
-                        // Email is not registered, proceed with user creation
-                        auth.createUserWithEmailAndPassword(email, password)
-                            .addOnCompleteListener(requireActivity()) { task ->
-                                if (task.isSuccessful) {
-                                    // Sign-up successful, navigate to the next screen or perform other actions
-                                    Toast.makeText(
-                                        requireContext(),
-                                        "Sign up successful!",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
 
-                                    // Navigate to the next screen, for example, the HomeFragment
-                                    findNavController().navigate(R.id.action_signupFragment_to_homeFragment)
-                                } else {
-                                    // Sign-up failed, display an error message
-                                    val exception = task.exception
-                                    if (exception is FirebaseAuthUserCollisionException) {
-                                        // The email address is already in use by another account
-                                        Toast.makeText(
-                                            requireContext(),
-                                            "The email address is already in use by another account.",
-                                            Toast.LENGTH_SHORT
-                                        ).show()
-                                    } else {
-                                        // Some other error occurred during sign up
-                                        Toast.makeText(
-                                            requireContext(),
-                                            "Sign up failed. Please try again later.",
-                                            Toast.LENGTH_SHORT
-                                        ).show()
-                                    }
-                                }
-                            }
-                    }
-                }
 
-        } catch (e: IllegalArgumentException) {
-//             Handle the IllegalArgumentException here, e.g., display an error toast
+
+
+//        try {
+//
+//            if (email.isEmpty() || password.isEmpty() || userName.isEmpty()) {
+//                Toast.makeText(
+//                    requireContext(),
+//                    "email, password and username cannot be empty",
+//                    Toast.LENGTH_SHORT
+//                ).show()
+//
+//                return
+//            }
+//
+//
+//            // Check if the email is already registered
+//            FirebaseFirestore.getInstance().collection("users")
+//                .whereEqualTo("email", email)
+//                .get()
+//                .addOnSuccessListener { querySnapshot ->
+//                    if (!querySnapshot.isEmpty) {
+//                        // Email is already registered, show an error message to the user
+//                        Toast.makeText(
+//                            requireContext(),
+//                            "The email address is already in use by another account.",
+//                            Toast.LENGTH_SHORT
+//                        ).show()
+//                    } else {
+//                        // Email is not registered, proceed with user creation
+//                        auth.createUserWithEmailAndPassword(email, password)
+//                            .addOnCompleteListener(requireActivity()) { task ->
+//                                if (task.isSuccessful) {
+//                                    // Sign-up successful, navigate to the next screen or perform other actions
+//                                    Toast.makeText(
+//                                        requireContext(),
+//                                        "Sign up successful!",
+//                                        Toast.LENGTH_SHORT
+//                                    ).show()
+//
+//                                    // Navigate to the next screen, for example, the HomeFragment
+//                                    findNavController().navigate(R.id.action_signupFragment_to_homeFragment)
+//                                } else {
+//                                    // Sign-up failed, display an error message
+//                                    val exception = task.exception
+//                                    if (exception is FirebaseAuthUserCollisionException) {
+//                                        // The email address is already in use by another account
+//                                        Toast.makeText(
+//                                            requireContext(),
+//                                            "The email address is already in use by another account.",
+//                                            Toast.LENGTH_SHORT
+//                                        ).show()
+//                                    } else {
+//                                        // Some other error occurred during sign up
+//                                        Toast.makeText(
+//                                            requireContext(),
+//                                            "Sign up failed. Please try again later.",
+//                                            Toast.LENGTH_SHORT
+//                                        ).show()
+//                                    }
+//                                }
+//                            }
+//                    }
+//                }
+//
+//        } catch (e: IllegalArgumentException) {
+////             Handle the IllegalArgumentException here, e.g., display an error toast
+//            Toast.makeText(
+//                requireContext(),
+//                "IllegalArgumentException: ${e.message}",
+//                Toast.LENGTH_SHORT
+//            ).show()
+//        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+        if (password != retypedPassword) {
+            // Password and retyped password don't match, show an error message to the user
             Toast.makeText(
                 requireContext(),
-                "IllegalArgumentException: ${e.message}",
+                "Password and retyped password don't match.",
                 Toast.LENGTH_SHORT
             ).show()
+        } else {
+            // Passwords match, proceed with user creation
+            auth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(requireActivity()) { task ->
+                    if (task.isSuccessful) {
+                        // Sign-up successful, navigate to the next screen or perform other actions
+                        Toast.makeText(
+                            requireContext(),
+                            "Sign up successful!",
+                            Toast.LENGTH_SHORT
+                        ).show()
+
+                        // Navigate to the next screen, for example, the HomeFragment
+                        findNavController().navigate(R.id.action_signupFragment_to_homeFragment)
+                    } else {
+                        // Sign-up failed, display an error message
+                        val exception = task.exception
+                        if (exception is FirebaseAuthUserCollisionException) {
+                            // The email address is already in use by another account
+                            Toast.makeText(
+                                requireContext(),
+                                "The email address is already in use by another account.",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        } else {
+                            // Some other error occurred during sign up
+                            Toast.makeText(
+                                requireContext(),
+                                "Sign up failed. Please try again later.",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+                }
         }
 
 

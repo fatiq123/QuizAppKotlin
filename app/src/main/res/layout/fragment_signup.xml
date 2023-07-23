@@ -24,34 +24,15 @@
             android:textSize="50sp"
             android:textStyle="bold" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/usernameInputLayout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/welcomeTextView"
-            android:layout_marginTop="36dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:hint="Username">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/userNameEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:textColorHint="#A9A9A9"
-                android:textSize="16sp" />
-
-        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/emailInputLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/usernameInputLayout"
-            android:layout_marginTop="8dp"
+            android:layout_below="@id/welcomeTextView"
+            android:layout_marginTop="36dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:hint="Email">
@@ -87,13 +68,33 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/retypePasswordInputLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/passwordInputLayout"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:hint="Retype Password">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/retypePasswordEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:textColorHint="#A9A9A9"
+                android:textSize="16sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
         <!-- Add your login button, forgot password link, etc. here -->
 
         <Button
             android:id="@+id/signupButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/passwordInputLayout"
+            android:layout_below="@id/retypePasswordInputLayout"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="30dp"
             android:layout_marginRight="10dp"
