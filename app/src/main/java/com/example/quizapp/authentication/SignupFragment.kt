@@ -13,10 +13,12 @@ import androidx.navigation.fragment.findNavController
 import com.example.quizapp.R
 import com.example.quizapp.databinding.FragmentSignupBinding
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
+import java.lang.IllegalArgumentException
 
 class SignupFragment : Fragment() {
 
@@ -62,82 +64,163 @@ class SignupFragment : Fragment() {
 
     private fun createNewUser(email: String, password: String, userName: String) {
 
+//        try {
+//
+//            if (email.isEmpty() || password.isEmpty() || userName.isEmpty()) {
+//                Toast.makeText(
+//                    requireContext(),
+//                    "Email and password cannot be empty.",
+//                    Toast.LENGTH_SHORT
+//                ).show()
+//
+//                return
+//            }
+//            auth.createUserWithEmailAndPassword(email, password)
+//                .addOnCompleteListener(requireActivity()) { task ->
+//                    if (task.isSuccessful) {
+//                        // Sign-up successful, navigate to the next screen or perform other actions
+//                        Toast.makeText(
+//                            requireContext(),
+//                            "Sign up successful!",
+//                            Toast.LENGTH_SHORT
+//                        ).show()
+//
+//
+//                        // Save user details to Firestore
+//                        val currentUser = auth.currentUser
+//                        if (currentUser != null) {
+//                            val newUser = hashMapOf(
+//                                "email" to email,
+//                                "username" to userName // Save the username along with other user details
+//                            )
+//
+//                            // Assuming you have a "users" collection in Firestore
+//                            val db = FirebaseFirestore.getInstance()
+//                            db.collection("users").document(currentUser.uid)
+//                                .set(newUser)
+//                                .addOnSuccessListener {
+//                                    // User details saved to Firestore
+//                                    // Navigate to the next screen, for example, the HomeFragment
+//                                    findNavController().navigate(R.id.action_signupFragment_to_homeFragment)
+//                                }
+//                                .addOnFailureListener { e ->
+//                                    // Error saving user details to Firestore
+//                                    Toast.makeText(
+//                                        requireContext(),
+//                                        "Error saving user details: ${e.message}",
+//                                        Toast.LENGTH_SHORT
+//                                    ).show()
+//                                }
+//                        } else {
+//                            // Handle the case where currentUser is null
+//                            Toast.makeText(
+//                                requireContext(),
+//                                "Error: User is not signed in.",
+//                                Toast.LENGTH_SHORT
+//                            ).show()
+//                        }
+////
+////                        // Navigate to the next screen, for example, the HomeFragment
+////                        findNavController().navigate(R.id.action_signupFragment_to_homeFragment)
+//                    } else {
+//
+//
+//                        // Sign-up failed, display an error message and log the exception
+//                        Log.e("SignupFragment", "Error creating user: ${task.exception?.message}")
+//
+//
+//
+//
+//                        // Sign-up failed, display an error message
+//                        Toast.makeText(
+//                            requireContext(),
+//                            "Sign up failed. Please try again later.",
+//                            Toast.LENGTH_SHORT
+//                        ).show()
+//                    }
+//                }
+//
+//        } catch (e: IllegalArgumentException) {
+//            // Handle the IllegalArgumentException here, e.g., display an error toast
+//            Toast.makeText(
+//                requireContext(),
+//                "IllegalArgumentException: ${e.message}",
+//                Toast.LENGTH_SHORT
+//            ).show()
+//        }
+
+
         try {
 
             if (email.isEmpty() || password.isEmpty() || userName.isEmpty()) {
                 Toast.makeText(
                     requireContext(),
-                    "Email and password cannot be empty.",
+                    "email, password and username cannot be empty",
                     Toast.LENGTH_SHORT
                 ).show()
 
                 return
             }
-            auth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(requireActivity()) { task ->
-                    if (task.isSuccessful) {
-                        // Sign-up successful, navigate to the next screen or perform other actions
+
+
+            // Check if the email is already registered
+            FirebaseFirestore.getInstance().collection("users")
+                .whereEqualTo("email", email)
+                .get()
+                .addOnSuccessListener { querySnapshot ->
+                    if (!querySnapshot.isEmpty) {
+                        // Email is already registered, show an error message to the user
                         Toast.makeText(
                             requireContext(),
-                            "Sign up successful!",
+                            "The email address is already in use by another account.",
                             Toast.LENGTH_SHORT
                         ).show()
-
-
-                        // Save user details to Firestore
-                        val currentUser = auth.currentUser
-                        if (currentUser != null) {
-                            val newUser = hashMapOf(
-                                "email" to email,
-                                "username" to userName // Save the username along with other user details
-                            )
-
-                            // Assuming you have a "users" collection in Firestore
-                            val db = FirebaseFirestore.getInstance()
-                            db.collection("users").document(currentUser.uid)
-                                .set(newUser)
-                                .addOnSuccessListener {
-                                    // User details saved to Firestore
-                                    // Navigate to the next screen, for example, the HomeFragment
-                                    findNavController().navigate(R.id.action_signupFragment_to_homeFragment)
-                                }
-                                .addOnFailureListener { e ->
-                                    // Error saving user details to Firestore
+                    } else {
+                        // Email is not registered, proceed with user creation
+                        auth.createUserWithEmailAndPassword(email, password)
+                            .addOnCompleteListener(requireActivity()) { task ->
+                                if (task.isSuccessful) {
+                                    // Sign-up successful, navigate to the next screen or perform other actions
                                     Toast.makeText(
                                         requireContext(),
-                                        "Error saving user details: ${e.message}",
+                                        "Sign up successful!",
                                         Toast.LENGTH_SHORT
                                     ).show()
+
+                                    // Navigate to the next screen, for example, the HomeFragment
+                                    findNavController().navigate(R.id.action_signupFragment_to_homeFragment)
+                                } else {
+                                    // Sign-up failed, display an error message
+                                    val exception = task.exception
+                                    if (exception is FirebaseAuthUserCollisionException) {
+                                        // The email address is already in use by another account
+                                        Toast.makeText(
+                                            requireContext(),
+                                            "The email address is already in use by another account.",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    } else {
+                                        // Some other error occurred during sign up
+                                        Toast.makeText(
+                                            requireContext(),
+                                            "Sign up failed. Please try again later.",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
                                 }
-                        } else {
-                            // Handle the case where currentUser is null
-                            Toast.makeText(
-                                requireContext(),
-                                "Error: User is not signed in.",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
-//
-//                        // Navigate to the next screen, for example, the HomeFragment
-//                        findNavController().navigate(R.id.action_signupFragment_to_homeFragment)
-                    } else {
-                        // Sign-up failed, display an error message
-                        Toast.makeText(
-                            requireContext(),
-                            "Sign up failed. Please try again later.",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                            }
                     }
                 }
 
         } catch (e: IllegalArgumentException) {
-            // Handle the IllegalArgumentException here, e.g., display an error toast
+//             Handle the IllegalArgumentException here, e.g., display an error toast
             Toast.makeText(
                 requireContext(),
                 "IllegalArgumentException: ${e.message}",
                 Toast.LENGTH_SHORT
             ).show()
         }
+
 
     }
 
