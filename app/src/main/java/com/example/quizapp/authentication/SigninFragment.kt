@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.quizapp.R
 import com.example.quizapp.databinding.FragmentSigninBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -77,6 +78,7 @@ class LoginFragment : Fragment() {
 
     // if the user already exists we will check it onStart
     override fun onStart() {
+        super.onStart()
 
         val currentUser = auth.currentUser
 
@@ -84,10 +86,11 @@ class LoginFragment : Fragment() {
             gotoHomeScreen()
         }
 
-        super.onStart()
     }
 
     private fun gotoHomeScreen() {
-        // code for fragment to home screen
+        // code for fragment to home screen if user already exists
+        val action = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
+        findNavController().navigate(action)
     }
 }

@@ -9,10 +9,15 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.example.quizapp.R
 import com.example.quizapp.databinding.FragmentSignupBinding
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class SignupFragment : Fragment() {
 
     private lateinit var binding: FragmentSignupBinding
+
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -22,6 +27,9 @@ class SignupFragment : Fragment() {
 //        return inflater.inflate(R.layout.fragment_signup, container, false)
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_signup, container, false)
 
+
+        // Initialize Firebase Auth
+        auth = Firebase.auth
 
 
 
@@ -36,6 +44,20 @@ class SignupFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+
+     override fun onStart() {
+        super.onStart()
+        // Check if user is signed in (non-null) and update UI accordingly.
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            reload()
+        }
+    }
+
+    private fun reload() {
+
     }
 
 }
