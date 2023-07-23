@@ -8,6 +8,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -30,6 +31,9 @@ class HomeFragment : Fragment(), BottomNavigationView.OnNavigationItemSelectedLi
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
+
+//        (activity as AppCompatActivity).supportActionBar?.hide()
+
 
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         val view = binding.root
