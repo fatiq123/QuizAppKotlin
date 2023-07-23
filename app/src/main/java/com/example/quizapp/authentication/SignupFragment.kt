@@ -18,7 +18,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
-import java.lang.IllegalArgumentException
+import kotlin.IllegalArgumentException
 
 class SignupFragment : Fragment() {
 
@@ -150,12 +150,6 @@ class SignupFragment : Fragment() {
 //        }
 
 
-
-
-
-
-
-
 //        try {
 //
 //            if (email.isEmpty() || password.isEmpty() || userName.isEmpty()) {
@@ -228,67 +222,72 @@ class SignupFragment : Fragment() {
 //        }
 
 
+        try {
+
+            if (email.isEmpty() || password.isEmpty() || retypedPassword.isEmpty()) {
+                Toast.makeText(
+                    requireContext(),
+                    "Sign up failed. Please try again later.",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
 
 
-
-
-
-
-
-
-
-
-
-        if (password != retypedPassword) {
-            // Password and retyped password don't match, show an error message to the user
-            Toast.makeText(
-                requireContext(),
-                "Password and retyped password don't match.",
-                Toast.LENGTH_SHORT
-            ).show()
-        } else {
-            // Passwords match, proceed with user creation
-            auth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(requireActivity()) { task ->
-                    if (task.isSuccessful) {
-                        // Sign-up successful, navigate to the next screen or perform other actions
-                        Toast.makeText(
-                            requireContext(),
-                            "Sign up successful!",
-                            Toast.LENGTH_SHORT
-                        ).show()
-
-                        // Navigate to the next screen, for example, the HomeFragment
-                        findNavController().navigate(R.id.action_signupFragment_to_homeFragment)
-                    } else {
-                        // Sign-up failed, display an error message
-                        val exception = task.exception
-                        if (exception is FirebaseAuthUserCollisionException) {
-                            // The email address is already in use by another account
+            if (password != retypedPassword) {
+                // Password and retyped password don't match, show an error message to the user
+                Toast.makeText(
+                    requireContext(),
+                    "Password and retyped password don't match.",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else {
+                // Passwords match, proceed with user creation
+                auth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(requireActivity()) { task ->
+                        if (task.isSuccessful) {
+                            // Sign-up successful, navigate to the next screen or perform other actions
                             Toast.makeText(
                                 requireContext(),
-                                "The email address is already in use by another account.",
+                                "Sign up successful!",
                                 Toast.LENGTH_SHORT
                             ).show()
+
+                            // Navigate to the next screen, for example, the HomeFragment
+                            findNavController().navigate(R.id.action_signupFragment_to_homeFragment)
                         } else {
-                            // Some other error occurred during sign up
-                            Toast.makeText(
-                                requireContext(),
-                                "Sign up failed. Please try again later.",
-                                Toast.LENGTH_SHORT
-                            ).show()
+                            // Sign-up failed, display an error message
+                            val exception = task.exception
+                            if (exception is FirebaseAuthUserCollisionException) {
+                                // The email address is already in use by another account
+                                Toast.makeText(
+                                    requireContext(),
+                                    "The email address is already in use by another account.",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            } else {
+                                // Some other error occurred during sign up
+                                Toast.makeText(
+                                    requireContext(),
+                                    "Sign up failed. Please try again later.",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
                         }
                     }
-                }
+            }
+
+        } catch (e: IllegalArgumentException) {
+            // Handle the IllegalArgumentException here, e.g., display an error toast
+            Toast.makeText(
+                requireContext(),
+                "IllegalArgumentException: ${e.message}",
+                Toast.LENGTH_SHORT
+            ).show()
         }
 
 
     }
 
-
-    private fun updateUI(user: FirebaseUser?) {
-
-    }
 
 
     override fun onStart() {

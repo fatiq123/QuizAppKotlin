@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- edittext_outline_custom.xml -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Unfocused state -->
+    <item android:state_focused="false">
+        <shape android:shape="rectangle">
+            <stroke
+                android:width="2dp"
+                android:color="#DDDDDD" /> <!-- Outline color when not focused -->
+            <corners android:radius="8dp" /> <!-- Adjust corner radius as needed -->
+        </shape>
+    </item>
+
+    <!-- Focused state -->
+    <item android:state_focused="true">
+        <shape android:shape="rectangle">
+            <stroke
+                android:width="2dp"
+                android:color="#FFFFFF" /> <!-- Outline color when focused (brighter) -->
+            <corners android:radius="8dp" /> <!-- Adjust corner radius as needed -->
+        </shape>
+    </item>
+</selector>
