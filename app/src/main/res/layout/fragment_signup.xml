@@ -24,58 +24,68 @@
             android:textSize="50sp"
             android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/userNameEditText"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/usernameInputLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_below="@id/welcomeTextView"
-            android:layout_marginLeft="10dp"
             android:layout_marginTop="36dp"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/edittext_background"
-            android:ems="1"
-            android:hint="Username"
-            android:inputType="text"
-            android:maxLines="1"
-            android:paddingStart="26dp"
-            android:paddingEnd="16dp"
-            android:textColor="#000000"
-            android:textColorHint="#A9A9A9"
-            android:textSize="16sp" />
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:hint="Username">
 
-        <EditText
-            android:id="@+id/emailEditText"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_below="@id/userNameEditText"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/edittext_background"
-            android:hint="@string/email"
-            android:inputType="textEmailAddress"
-            android:paddingStart="26dp"
-            android:paddingEnd="16dp"
-            android:textColor="#000000"
-            android:textColorHint="#A9A9A9"
-            android:textSize="16sp" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/userNameEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:textColorHint="#A9A9A9"
+                android:textSize="16sp" />
 
-        <EditText
-            android:id="@+id/passwordEditText"
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/emailInputLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_below="@id/emailEditText"
-            android:layout_marginLeft="10dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/usernameInputLayout"
             android:layout_marginTop="8dp"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/edittext_background"
-            android:hint="@string/password"
-            android:inputType="textPassword"
-            android:paddingStart="26dp"
-            android:paddingEnd="16dp"
-            android:textColor="#000000"
-            android:textColorHint="#A9A9A9"
-            android:textSize="16sp" />
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:hint="Email">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/emailEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:textColorHint="#A9A9A9"
+                android:textSize="16sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/passwordInputLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/emailInputLayout"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:hint="Password">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/passwordEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:textColorHint="#A9A9A9"
+                android:textSize="16sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <!-- Add your login button, forgot password link, etc. here -->
 
@@ -83,7 +93,7 @@
             android:id="@+id/signupButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/passwordEditText"
+            android:layout_below="@id/passwordInputLayout"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="30dp"
             android:layout_marginRight="10dp"

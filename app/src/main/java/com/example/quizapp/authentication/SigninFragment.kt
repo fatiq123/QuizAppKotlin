@@ -22,11 +22,6 @@ class LoginFragment : Fragment() {
     private lateinit var binding: FragmentSigninBinding
     private lateinit var auth: FirebaseAuth
 
-//    companion object {
-//        var result = 0
-//        var totalQuestions = 0
-//    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -34,11 +29,16 @@ class LoginFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_signin, container, false)
 
+        return binding.root
+    }
 
-        auth = Firebase.auth
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
+        auth = Firebase.auth    // initializing the firebase auth
 
+        // getting email and password from text fields
         binding.loginButton.setOnClickListener {
             loginWithEmailAndPassword(
                 binding.emailEditText.text.toString().trim(),
@@ -52,18 +52,24 @@ class LoginFragment : Fragment() {
         }
 
 
-
-        return binding.root
     }
+
+
 
     private fun loginWithEmailAndPassword(email: String, password: String) {
         auth.signInWithEmailAndPassword(email, password)
 
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    // User creation successful, retrieve the user
-                    val user: FirebaseUser? = auth.currentUser
-                    // Proceed with further actions
+                    // Sign-in successful, navigate to the next screen or perform other actions
+                    Toast.makeText(
+                        requireContext(),
+                        "Sign in successful!",
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                    // Navigate to the next screen, for example, the HomeFragment
+                    findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
                 } else {
                     Toast.makeText(
                         context,
