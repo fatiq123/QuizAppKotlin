@@ -77,6 +77,8 @@ dependencies {
     // Firebase Authentication
     // Add the dependency for the Firebase Authentication library
     implementation("com.google.firebase:firebase-auth-ktx")
+    // Declare the dependency for the Cloud Firestore library
+    implementation("com.google.firebase:firebase-firestore-ktx")
 
 
     def nav_version = "2.6.0"
@@ -87,5 +89,6 @@ dependencies {
 
 //    required dependency for the circular image view
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+
 
 }

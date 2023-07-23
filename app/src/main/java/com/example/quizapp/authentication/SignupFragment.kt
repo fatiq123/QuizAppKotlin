@@ -15,6 +15,7 @@ import com.example.quizapp.databinding.FragmentSignupBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 
 class SignupFragment : Fragment() {
@@ -71,8 +72,39 @@ class SignupFragment : Fragment() {
                         Toast.LENGTH_SHORT
                     ).show()
 
-                    // Navigate to the next screen, for example, the HomeFragment
-                    findNavController().navigate(R.id.action_signupFragment_to_homeFragment)
+                    // Save user details to Firestore
+                    val currentUser = auth.currentUser
+                    if (currentUser != null) {
+                        val newUser = hashMapOf(
+                            "email" to email,
+                            "username" to userName // Save the username along with other user details
+                        )
+
+                        // Assuming you have a "users" collection in Firestore
+                        val db = FirebaseFirestore.getInstance()
+                        db.collection("users").document(currentUser.uid)
+                            .set(newUser)
+                            .addOnSuccessListener {
+                                // User details saved to Firestore
+                                // Navigate to the next screen, for example, the HomeFragment
+                                findNavController().navigate(R.id.action_signupFragment_to_homeFragment)
+                            }
+                            .addOnFailureListener { e ->
+                                // Error saving user details to Firestore
+                                Toast.makeText(
+                                    requireContext(),
+                                    "Error saving user details: ${e.message}",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                    } else {
+                        // Handle the case where currentUser is null
+                        Toast.makeText(
+                            requireContext(),
+                            "Error: User is not signed in.",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 } else {
                     // Sign-up failed, display an error message
                     Toast.makeText(

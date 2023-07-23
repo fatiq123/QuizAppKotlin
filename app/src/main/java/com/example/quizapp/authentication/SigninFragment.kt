@@ -40,10 +40,20 @@ class LoginFragment : Fragment() {
 
         // getting email and password from text fields
         binding.loginButton.setOnClickListener {
-            loginWithEmailAndPassword(
-                binding.emailEditText.text.toString().trim(),
-                binding.passwordEditText.text.toString().trim()
-            )
+
+            val email = binding.emailEditText.text.toString().trim()
+            val password = binding.passwordEditText.text.toString().trim()
+
+            if (email.isNotEmpty() && password.isNotEmpty()) {
+                loginWithEmailAndPassword(email = email, password = password)
+            } else {
+                Toast.makeText(
+                    requireContext(),
+                    "Please enter valid email and password.",
+                    Toast.LENGTH_SHORT
+                )
+                    .show()
+            }
         }
 
 
@@ -62,14 +72,19 @@ class LoginFragment : Fragment() {
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     // Sign-in successful, navigate to the next screen or perform other actions
-                    Toast.makeText(
-                        requireContext(),
-                        "Sign in successful!",
-                        Toast.LENGTH_SHORT
-                    ).show()
+//                    Toast.makeText(
+//                        requireContext(),
+//                        "Sign in successful!",
+//                        Toast.LENGTH_SHORT
+//                    ).show()
+//
+//                    // Navigate to the next screen, for example, the HomeFragment
+//                    findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
 
-                    // Navigate to the next screen, for example, the HomeFragment
-                    findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+
+                    // Sign-in successful, navigate to the HomeFragment
+                    gotoHomeScreen()
+
                 } else {
                     Toast.makeText(
                         context,

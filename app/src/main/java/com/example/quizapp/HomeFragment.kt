@@ -3,6 +3,8 @@ package com.example.quizapp
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
@@ -164,5 +166,34 @@ class HomeFragment : Fragment(), BottomNavigationView.OnNavigationItemSelectedLi
 //        navController.navigate(action)
 //    }
 
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+
+        inflater.inflate(R.menu.bottom_navigation_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+
+        when(item.itemId) {
+            R.id.miAbout -> {
+                val action = HomeFragmentDirections.actionHomeFragmentToAboutFragment()
+                findNavController().navigate(action)
+                return true
+            }
+            R.id.miQuiz -> {
+                val action = HomeFragmentDirections.actionHomeFragmentToQuizResultsFragment()
+                findNavController().navigate(action)
+                return true
+            }
+            R.id.miHome -> {
+                return true
+            }
+
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
 
 }
