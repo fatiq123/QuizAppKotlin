@@ -15,6 +15,13 @@
         <item name="android:background">@drawable/button_background</item>
     </style>
 
+    
+    
+    <style name="Theme.QuizApp.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    
 
     <color name="your_custom_primary_color">#0F68D3</color>
     <color name="your_custom_primary_variant_color">#253DC5</color>
