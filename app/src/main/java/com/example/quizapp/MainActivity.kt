@@ -2,18 +2,15 @@ package com.example.quizapp
 
 import android.os.Bundle
 import android.view.Menu
-import android.view.MenuItem
-import androidx.databinding.DataBindingUtil
-import androidx.navigation.findNavController
-import androidx.navigation.ui.setupActionBarWithNavController
-import com.example.quizapp.databinding.ActivityMainBinding
-import androidx.appcompat.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.setupWithNavController
+import androidx.navigation.ui.setupActionBarWithNavController
+import com.example.quizapp.databinding.ActivityMainBinding
 import com.example.quizapp.databinding.FragmentHomeBinding
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.internal.ContextUtils.getActivity
 
 
 class MainActivity : AppCompatActivity() {
@@ -33,7 +30,7 @@ class MainActivity : AppCompatActivity() {
 //        val toolbar: Toolbar = findViewById(R.id.toolbar)
 //        setSupportActionBar(toolbar)
 
-        // Find the custom Toolbar by ID
+//        // Find the custom Toolbar by ID
         customToolbar = findViewById(R.id.customToolbar)
         setSupportActionBar(customToolbar)
 

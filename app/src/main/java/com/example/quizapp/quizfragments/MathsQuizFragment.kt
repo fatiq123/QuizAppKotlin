@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -39,6 +40,10 @@ class MathsQuizFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
+
+        (requireActivity() as AppCompatActivity).supportActionBar?.hide()
+
+
         // Inflate the layout for this fragment
         binding = FragmentMathsQuizBinding.inflate(inflater, container, false)
 
