@@ -31,6 +31,7 @@
 
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
 
+
     </style>
 
 
