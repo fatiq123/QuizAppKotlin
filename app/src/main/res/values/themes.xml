@@ -25,7 +25,6 @@
 
 
 
-
     <!--Custom theme for quizes-->
     <style name="QuizTheme" parent="Theme.Material3.DayNight.NoActionBar">
 
