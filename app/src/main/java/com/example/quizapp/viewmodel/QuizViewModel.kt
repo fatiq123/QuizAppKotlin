@@ -71,7 +71,6 @@ class QuizViewModel : ViewModel() {
         return questionsLiveData
     }
 
-
     fun getPhysicsQuestionsFromLiveData(): LiveData<List<Question>> {
         return questionsPhysicsLiveData
     }
